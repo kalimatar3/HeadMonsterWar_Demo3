@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230776b607a68ce449cad363aa433667, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  GunName: Pistol
+  Bulletname: Pistolbullet
+  CanThroughObj: 0
+  HitExplosionName: PistolHitExplosion
+  FireExplosionName: PistolFireExplosion
+  GunUpgrade:
+  - Cost: 1
+    Firerate: 0.1
+    MaxAmmo: 30
+    Reloadtime: 1
+  - Cost: 1
+    Firerate: 0.1
+    MaxAmmo: 31
+    Reloadtime: 1
+  - Cost: 1
+    Firerate: 0.1
+    MaxAmmo: 32
+    Reloadtime: 1
+  - Cost: 1
+    Firerate: 0.1
+    MaxAmmo: 33
+    Reloadtime: 1
+  - Cost: 1
+    Firerate: 0.1
+    MaxAmmo: 33
+    Reloadtime: 1
+  - Cost: 1
+    Firerate: 0.1
+    MaxAmmo: 33
+    Reloadtime: 1
