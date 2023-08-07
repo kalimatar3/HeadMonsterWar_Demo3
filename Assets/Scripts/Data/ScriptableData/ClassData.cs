@@ -15,9 +15,11 @@ public class ClassData
     public class GunData
     {
         public int Cost = 1;
-        public float Firerate = 0.5f;
         public int MaxAmmo =  10; 
+        public float Firerate = 0.5f;
         public float Reloadtime = 1;
+        public float Dame = 1;
+        public float Range;
     
     }
     [Serializable]

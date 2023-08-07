@@ -7,6 +7,7 @@ public class WaveManager : MyBehaviour
     [SerializeField] protected List<Transform> ListWave;
     [SerializeField] protected int CurrentWave;
     [SerializeField] protected float preparetime;
+    public float CoinLevelReward;
     protected float timer;
     protected override void LoadComponents()
     {
@@ -20,6 +21,19 @@ public class WaveManager : MyBehaviour
         {
             ListWave.Add(wave);
         }
+    }
+    protected void OnEnable()
+    {
+        this.StartCoroutine(this.DelayLoadRewardCoin());
+    }
+    protected IEnumerator DelayLoadRewardCoin()
+    {
+        yield return new WaitUntil(predicate :()=>
+        {
+            if(CoinUISpawner.Instance == null) return false;
+            return true;
+        });
+        CoinUISpawner.Instance.CurrentNumberofCoins = (int)this.CoinLevelReward/(int)5;
     }
     protected virtual void ChangeLvInEmty()
     {
@@ -48,8 +62,8 @@ public class WaveManager : MyBehaviour
             CurrentWave ++;
             if(CurrentWave >= ListWave.Count)
             {
-                LevelManager.Instance.NextLevel();
                 PanelCtrl.Instance.ShowPanel("Winpannel");
+                LevelManager.Instance.NextLevel();
             }
         }
     }

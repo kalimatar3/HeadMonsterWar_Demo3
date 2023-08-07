@@ -10,6 +10,7 @@ public class DataManager : MyBehaviour
         public int Gold;
         public string CurrentMap;
         public string CurrentModelName ;
+        public string CurrentGunName;
         public int CurrentLevel;
         public  float MusicVolume,SoundEffectVolume;
         public List<ShopData> ListShopData;
@@ -33,14 +34,13 @@ public class DataManager : MyBehaviour
     [Serializable] 
     public class UpgradeableData
     {
-        public String Name;
-        public int CurrentUpgrade;
-    }
-    public enum UpgradeabledataName
-    {
-        IcreMaxHPCost,
-        IcreMaxbulletPistolCost,
-        IcreCoinCost,
+        public List<element> ListUpdate;
+        [Serializable]
+        public class element
+        {
+            public String Name;
+            public int CurrentUpgrade;
+        }
     }
     protected static DataManager instance;
     public static DataManager Instance { get => instance;}
@@ -60,6 +60,7 @@ public class DataManager : MyBehaviour
     public List<BulletsSO> ListBulletsSO;
     public List<CostSO> ListCostSO;
     public List<DropItemSO> ListDropItemSO;
+    public float test;
     protected override void Awake()
     {
         base.Awake();
@@ -73,10 +74,10 @@ public class DataManager : MyBehaviour
     protected override void Start()
     {
         base.Start();
-        StartCoroutine(LoadListShopDatadelay());
         StartCoroutine(LoadListUpGradeAbledelay());
         StartCoroutine(LoadListDropItemDatadelay());
-         StartCoroutine(UnlockDelay());
+        StartCoroutine(LoadListShopDatadelay());
+        StartCoroutine(UnlockDelay());
    }
     protected override void LoadComponents()
     {
@@ -127,16 +128,21 @@ public class DataManager : MyBehaviour
     protected void LoadListUpGradeAble()
     {
         if(ListUpGradeAbleData.Count > 0) return;
-        for(int i = 0 ; i < ListCostSO.Count; i ++)
+        for(int i = 0 ; i < ListCostSO.Count ; i++)
         {
-            ListUpGradeAbleData.Add(new UpgradeableData() {Name = ListCostSO[i].Name});
+            ListUpGradeAbleData.Add(new UpgradeableData() { ListUpdate = new List<UpgradeableData.element>()});
+            for(int j = 0 ; j < ListCostSO[i].List.Count ; j++)
+            {
+                UpgradeableData.element thiselement = new UpgradeableData.element() {Name = ListCostSO[i].List[j].Name};
+                ListUpGradeAbleData[i].ListUpdate.Add(thiselement);
+            }
         }
     }
     protected IEnumerator LoadListUpGradeAbledelay()
     {
         yield return new WaitUntil( predicate :() =>
         {
-            if(ListCostSO.Count == 0) return false;
+            if(ListCostSO.Count <= 0) return false;
             return true;
         });
         this.LoadListUpGradeAble();
@@ -210,11 +216,12 @@ public class DataManager : MyBehaviour
     }
     public virtual void Unlock(Transform obj)
     {
+        ButtonManager.Instance.cache = obj.parent.GetComponent<RectTransform>();
         foreach(ShopData element in ListShopData)
         {
             if(element.Name == GetReferanceName(obj))
             {
-                if(!CanPayGold(element.Cost) || element.Cost == 0)
+                if(!CanPayGold(element.Cost) || element.Cost  == 0)
                 {
                     element.Available = false; 
                     return;
@@ -222,6 +229,7 @@ public class DataManager : MyBehaviour
                 this.DcrGold(element.Cost);
                 ButtonManager.Instance.BuyButton.gameObject.SetActive(false);
                 element.Available = true ;
+                obj.gameObject.SetActive(false);
             }
         }
     }
@@ -229,9 +237,12 @@ public class DataManager : MyBehaviour
     {
         foreach(CostSO element in ListCostSO)
         {
-            if(Name == element.Name)
+            for(int i = 0; i < element.List.Count ; i++)
             {
-                return element.Cost.Count;
+                if(Name == element.List[i].Name)
+                {
+                    return element.List[i].Cost.Count;
+                }
             }
         }
         return 1000000;
@@ -252,10 +263,14 @@ public class DataManager : MyBehaviour
     {
         foreach(CostSO element in ListCostSO)
         {
-            if(Name == element.Name)
+            for(int i = 0 ; i < element.List.Count ; i ++)
             {
-                if(GetUpgradenumberfromUGAD(Name) >= GetmaxUpgradefromUGAD(Name) -1) return 0;
-                return element.Cost[GetUpgradenumberfromUGAD(Name)];
+                if(Name == element.List[i].Name)
+                {
+                     if(GetUpgradenumberfromUGAD(Name) >= GetmaxUpgradefromUGAD(Name) -1) return 0;
+                     test = GetUpgradenumberfromUGAD(Name);
+                     return element.List[0].Cost[GetUpgradenumberfromUGAD(Name)];
+                }
             }
         }
         return 10000;
@@ -264,11 +279,14 @@ public class DataManager : MyBehaviour
     {
         foreach(UpgradeableData element in ListUpGradeAbleData)
         {
-            if(name == element.Name)  
+            for(int i  = 0 ; i < element.ListUpdate.Count; i ++)
             {
-                if(element.CurrentUpgrade >= GetmaxUpgradefromUGAD(element.Name) - 1) return;
-                element.CurrentUpgrade = (element.CurrentUpgrade + 1);
-                SoundSpawner.Instance.Spawn(CONSTSoundsName.Upgrade,Vector3.zero,Quaternion.identity);
+                if(name == element.ListUpdate[i].Name)  
+                {
+                    if(element.ListUpdate[i].CurrentUpgrade >= GetmaxUpgradefromUGAD(element.ListUpdate[i].Name) - 1) return;
+                    element.ListUpdate[i].CurrentUpgrade ++;
+                    SoundSpawner.Instance.Spawn(CONSTSoundsName.Upgrade,Vector3.zero,Quaternion.identity);
+                }
             }
         }
     }
@@ -276,7 +294,10 @@ public class DataManager : MyBehaviour
     {        
         foreach(UpgradeableData element in ListUpGradeAbleData)
         {
-            if(name == element.Name) return element.CurrentUpgrade; 
+            for(int i = 0 ; i < element.ListUpdate.Count ;i ++)
+            {
+                if(name == element.ListUpdate[i].Name) return element.ListUpdate[i].CurrentUpgrade; 
+            }
         }
         return 0 ;
     }
@@ -299,26 +320,26 @@ public class DataManager : MyBehaviour
 
     public virtual void IcrCoinEarn()
     {
-        if(!CanPayGold(GetCost(UpgradeabledataName.IcreCoinCost.ToString()))) return;
-        this.DcrGold(GetCost(UpgradeabledataName.IcreCoinCost.ToString()));
-        this.UpgradefromUGAD(UpgradeabledataName.IcreCoinCost.ToString());
+        if(!CanPayGold(GetCost("Coin"))) return;
+        this.DcrGold(GetCost("Coin"));
+        this.UpgradefromUGAD("Coin");
         this.UpgradefromDID("Coin");
         Lsmanager.Instance.SaveGame();
     }
 
     public virtual void IcrMaxHp()
     {
-        if(!CanPayGold(GetCost(UpgradeabledataName.IcreMaxHPCost.ToString()))) return;
-        this.DcrGold(GetCost(UpgradeabledataName.IcreMaxHPCost.ToString()));
-        this.UpgradefromUGAD(UpgradeabledataName.IcreMaxHPCost.ToString());
+        if(!CanPayGold(GetCost("Hp"))) return;
+        this.DcrGold(GetCost("Hp"));
+        this.UpgradefromUGAD("Hp");
         Lsmanager.Instance.SaveGame();
     }
     public virtual void IcrMaxbullet()
     {
-        if(!CanPayGold(GetCost(UpgradeabledataName.IcreMaxbulletPistolCost.ToString()))) return;
-        this.DcrGold(GetCost(UpgradeabledataName.IcreMaxbulletPistolCost.ToString()));
-        this.UpgradefromUGAD(UpgradeabledataName.IcreMaxbulletPistolCost.ToString());
-        Lsmanager.Instance.SaveGame();
+         if(!CanPayGold(GetCost(CurrentGunName))) return;
+        this.DcrGold(GetCost(CurrentGunName));
+        this.UpgradefromUGAD(CurrentGunName);
+        Lsmanager.Instance.SaveGame();    
     }
     public virtual void PlayerDataFromJson(string JsonString)
     {
@@ -327,6 +348,7 @@ public class DataManager : MyBehaviour
         this.Gold = obj.Gold;
         this.CurrentMap = obj.CurrentMap;
         this.CurrentModelName = obj.CurrentModelName;
+        this.CurrentGunName = obj.CurrentGunName;
         this.ListUpGradeAbleData = obj.ListUpGradeAbleData;
         this.MusicVolume = obj.MusicVolume;
         this.SoundEffectVolume = obj.SoundEffectVolume;
@@ -338,6 +360,7 @@ public class DataManager : MyBehaviour
     {
         this.CurrentMap = "Map1";
         this.CurrentModelName = "Model0";
+        this.CurrentGunName = "Ak47";
         this.Gold = 99999;
         this.ListUpGradeAbleData = null;
         this.ListDropItemData = null;

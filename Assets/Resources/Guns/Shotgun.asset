@@ -19,18 +19,38 @@ MonoBehaviour:
   FireExplosionName: ShotgunFireExplosion
   GunUpgrade:
   - Cost: 1
-    Firerate: 0.5
     MaxAmmo: 3
+    Firerate: 0.5
     Reloadtime: 2
+    Dame: 1
+    Range: 0
   - Cost: 1
-    Firerate: 0.5
     MaxAmmo: 3
-    Reloadtime: 1.5
-  - Cost: 1
     Firerate: 0.5
-    MaxAmmo: 4
     Reloadtime: 1.5
+    Dame: 1
+    Range: 0
   - Cost: 1
-    Firerate: 0.5
     MaxAmmo: 4
+    Firerate: 0.5
     Reloadtime: 1.5
+    Dame: 1
+    Range: 0
+  - Cost: 1
+    MaxAmmo: 4
+    Firerate: 0.5
+    Reloadtime: 1.5
+    Dame: 1
+    Range: 0
+  - Cost: 1
+    MaxAmmo: 4
+    Firerate: 0.5
+    Reloadtime: 1.5
+    Dame: 1
+    Range: 0
+  - Cost: 1
+    MaxAmmo: 4
+    Firerate: 0.5
+    Reloadtime: 1.5
+    Dame: 1
+    Range: 0

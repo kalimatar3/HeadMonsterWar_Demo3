@@ -6,7 +6,7 @@ public class Shooting : PlayerAct
 {
     [Header("Fire")]
     [SerializeField] protected Transform Guntip;
-    [SerializeField] protected float FireRate;
+    [SerializeField] protected float FireRate,Dame;
     [Header(" Ammo ")]
     [SerializeField] protected float Reloadtime;
     [SerializeField] public float MaxAmmo,CurrentAmmo;
@@ -72,7 +72,7 @@ public class Shooting : PlayerAct
         {
             if(gunCtrl.ListGuns[i].gameObject.activeInHierarchy)
             {
-                ClassData.GunData gunData = gunCtrl.ListGunSO[i].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(DataManager.UpgradeabledataName.IcreMaxbulletPistolCost.ToString())];
+                ClassData.GunData gunData = gunCtrl.ListGunSO[i].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(DataManager.Instance.CurrentGunName)];
                 Bulletname =  gunCtrl.ListGunSO[i].Bulletname;
                 ThisExplosionFireName = gunCtrl.ListGunSO[i].FireExplosionName;
                 ThisExplosionHitName = gunCtrl.ListGunSO[i].HitExplosionName;
@@ -80,6 +80,7 @@ public class Shooting : PlayerAct
                 FireRate  = gunData.Firerate;
                 MaxAmmo = gunData.MaxAmmo;
                 Reloadtime = gunData.Reloadtime;
+                this.Dame = gunData.Dame;
             }
         } 
         if(CurrentAmmo > MaxAmmo) CurrentAmmo = MaxAmmo;
@@ -99,6 +100,7 @@ public class Shooting : PlayerAct
                     ThisBullet =  BulletSpawner.Instance.Spawn(Bulletname,Guntip.position,Guntip.rotation);
                     EffectSpawner.Instance.Spawn(ThisExplosionFireName,Guntip.position,Guntip.rotation);
                     ThisBullet.GetComponentInChildren<DealToEnemies>().CanThroughObj = this.CanThroughObj;
+                    ThisBullet.GetComponentInChildren<DealToEnemies>().dealnumber = this.Dame;
                     ThisBullet.GetComponentInChildren<DealToEnemies>().dealnumber = ThisBullet.GetComponentInChildren<DealToEnemies>().dealnumber*(1 + ExtraDame);
                     ThisBullet.GetComponentInChildren<DealToEnemies>().ExplosionHitName = ThisExplosionHitName;
                     ThisBullet.GetComponentInChildren<DealToEnvironments>().ExplosionHitName = ThisExplosionHitName;
@@ -133,7 +135,7 @@ public class Shooting : PlayerAct
     protected override void Action()
     {
         this.DameUp(BoostValue,BoostTime);
-        this.Getbulletdata();
+        //this.Getbulletdata();
         this.AutoReload();
         this.Reload();
         base.Action();
@@ -141,7 +143,7 @@ public class Shooting : PlayerAct
     protected override void Doing()
     {
         base.Doing();
-        this.shotting();
+       // this.shotting();
     }
     protected override bool CanDo()
     {

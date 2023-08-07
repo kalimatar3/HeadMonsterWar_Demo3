@@ -8,8 +8,8 @@ public class UIMaxbulletCost : UIperform
    protected override void PreformText()
     {
         base.PreformText();
-        if(DataManager.Instance.GetCost(DataManager.UpgradeabledataName.IcreMaxbulletPistolCost.ToString()) <= 0)  mes = "MAX";
-        else mes = DataManager.Instance.GetCost(DataManager.UpgradeabledataName.IcreMaxbulletPistolCost.ToString()).ToString();
+        if(DataManager.Instance.GetCost(DataManager.Instance.CurrentGunName) <= 0)  mes = "MAX";
+        else mes = DataManager.Instance.GetCost(DataManager.Instance.CurrentGunName).ToString();
         Text.text = mes;
     }
 }

@@ -8,8 +8,8 @@ public class UICoinCost : UIperform
    protected override void PreformText()
     {
         base.PreformText();
-        if(DataManager.Instance.GetCost(DataManager.UpgradeabledataName.IcreCoinCost.ToString()) <= 0)  mes = "MAX";
-        else mes = DataManager.Instance.GetCost(DataManager.UpgradeabledataName.IcreCoinCost.ToString()).ToString();
+        if(DataManager.Instance.GetCost("Coin") <= 0)  mes = "MAX";
+        else mes = DataManager.Instance.GetCost("Coin").ToString();
         Text.text = mes;
     }
 }

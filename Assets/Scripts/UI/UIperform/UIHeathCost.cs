@@ -8,8 +8,8 @@ public class UIHeathCost : UIperform
    protected override void PreformText()
     {
         base.PreformText();
-        if(DataManager.Instance.GetCost(DataManager.UpgradeabledataName.IcreMaxHPCost.ToString()) <= 0)  mes = "MAX";
-        else mes = DataManager.Instance.GetCost(DataManager.UpgradeabledataName.IcreMaxHPCost.ToString()).ToString();
+        if(DataManager.Instance.GetCost("Hp") <= 0)  mes = "MAX";
+        else mes = DataManager.Instance.GetCost("Hp").ToString();
         Text.text = mes;
     }
 }

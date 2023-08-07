@@ -13,15 +13,13 @@ public class ModelUIManager : MyBehaviour
         if(instance != this && instance != null) Destroy(this);
         else instance = this;
     }
-
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadListModel();
     }
-    protected override void Start()
+    protected void OnEnable()
     {
-        base.Start();
         this.StartCoroutine(this.DelayActiveModel());
     }
     protected IEnumerator DelayActiveModel()

@@ -13,6 +13,7 @@ public class ButtonManager : MyBehaviour
     public RectTransform SelectButton;
     public RectTransform  ApprearButton;
     public RectTransform BuyButton;
+    public RectTransform cache;
     protected override void Awake()
     {
         base.Awake();
@@ -122,6 +123,7 @@ public class ButtonManager : MyBehaviour
     protected void FixedUpdate()
     {
         this.AppearButtonState();
+        if(Currentbutton == null) Currentbutton = cache;
     }
     public void SettingMusicVolume()
     {
@@ -142,13 +144,6 @@ public class ButtonManager : MyBehaviour
     {
         this.Buttonsound();
         DataManager.Instance.Unlock(Currentbutton);
-        foreach(DataManager.ShopData element in DataManager.Instance.ListShopData)
-        {
-            if(Currentbutton.name == element.Name)
-            {
-                Currentbutton.gameObject.SetActive(!element.Available);
-            }
-        }
         Lsmanager.Instance.SaveGame();
     }
     protected void BuyState()

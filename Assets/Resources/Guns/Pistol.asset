@@ -12,33 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230776b607a68ce449cad363aa433667, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  GunName: Pistol
-  Bulletname: Pistolbullet
+  GunName: Ak47
+  Bulletname: Ak47bullet
   CanThroughObj: 0
-  HitExplosionName: PistolHitExplosion
-  FireExplosionName: PistolFireExplosion
+  HitExplosionName: Ak47HitExplosion
+  FireExplosionName: Ak47FireExplosion
   GunUpgrade:
   - Cost: 1
-    Firerate: 0.1
     MaxAmmo: 30
-    Reloadtime: 1
-  - Cost: 1
     Firerate: 0.1
+    Reloadtime: 1
+    Dame: 1
+    Range: 0
+  - Cost: 1
     MaxAmmo: 31
-    Reloadtime: 1
-  - Cost: 1
     Firerate: 0.1
+    Reloadtime: 1
+    Dame: 1
+    Range: 0
+  - Cost: 1
     MaxAmmo: 32
-    Reloadtime: 1
-  - Cost: 1
     Firerate: 0.1
-    MaxAmmo: 33
     Reloadtime: 1
+    Dame: 1
+    Range: 0
   - Cost: 1
-    Firerate: 0.1
     MaxAmmo: 33
+    Firerate: 0.1
     Reloadtime: 1
+    Dame: 1
+    Range: 0
   - Cost: 1
-    Firerate: 0.1
     MaxAmmo: 33
+    Firerate: 0.1
     Reloadtime: 1
+    Dame: 1
+    Range: 0
+  - Cost: 1
+    MaxAmmo: 33
+    Firerate: 0.1
+    Reloadtime: 1
+    Dame: 1
+    Range: 0

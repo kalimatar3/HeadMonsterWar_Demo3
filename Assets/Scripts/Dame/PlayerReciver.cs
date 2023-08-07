@@ -73,7 +73,7 @@ public class PlayerReciver : DameReciver
 
     public override void  ReBorn()
     {
-        this.MaxHp = playerController.playerSO.PlayerUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(DataManager.UpgradeabledataName.IcreMaxHPCost.ToString())].MaxHp;
+        this.MaxHp = playerController.playerSO.PlayerUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD("Hp")].MaxHp;
         base.ReBorn();
     }
     public virtual void invulnerable()

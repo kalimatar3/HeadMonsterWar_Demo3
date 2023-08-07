@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb62eccf8cea29248894beb86164db80, type: 3}
   m_Name: IcreMaxHPCost
   m_EditorClassIdentifier: 
-  Name: IcreMaxHPCost
-  Cost: 640000006400000064000000640000006400000064000000
+  List:
+  - Name: Hp
+    Cost: 640000006400000064000000640000006400000064000000
