@@ -33,7 +33,7 @@ public class WaveManager : MyBehaviour
             if(CoinUISpawner.Instance == null) return false;
             return true;
         });
-        CoinUISpawner.Instance.CurrentNumberofCoins = (int)this.CoinLevelReward/(int)5;
+        CoinUISpawner.Instance.CurrentNumberofCoins = (int)this.CoinLevelReward;
     }
     protected virtual void ChangeLvInEmty()
     {

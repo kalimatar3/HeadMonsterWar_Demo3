@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class followObj : MyBehaviour
 {
-    [SerializeField] protected float smooth;
+    [SerializeField] public float smooth;
     public Transform Obj;
     protected virtual void follow()
     {

@@ -56,6 +56,7 @@ public class GunCtrl : MyBehaviour
             if(gun.name == name)
             {
                 gun.gameObject.SetActive(true);
+                this.shooting = gun.GetComponentInChildren<Shooting>();
             }
             else gun.gameObject.SetActive(false);
 

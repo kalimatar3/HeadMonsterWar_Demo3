@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Timers;
 public class ButtonManager : MyBehaviour
 {
     protected static ButtonManager instance;
@@ -14,6 +15,7 @@ public class ButtonManager : MyBehaviour
     public RectTransform  ApprearButton;
     public RectTransform BuyButton;
     public RectTransform cache;
+    public RectTransform DailyRewardButton;
     protected override void Awake()
     {
         base.Awake();
@@ -120,6 +122,11 @@ public class ButtonManager : MyBehaviour
         }
         this.ApprearButton.gameObject.SetActive(false);
     }
+    public void DailyrewardButton()
+    {
+        CoinUISpawner.Instance.CurrentNumberofCoins = 100;
+        ButtonManager.instance.DailyRewardButton.gameObject.SetActive(false);
+    }
     protected void FixedUpdate()
     {
         this.AppearButtonState();
@@ -156,6 +163,7 @@ public class ButtonManager : MyBehaviour
                 return;
             }
         }
+        BuyButton.gameObject.SetActive(false); 
     }
     protected void SelectState()
     {
@@ -164,8 +172,10 @@ public class ButtonManager : MyBehaviour
             if(locked.name == Currentbutton.name)
             {
                 SelectButton.gameObject.SetActive(locked.gameObject.activeInHierarchy);
+                return;
             }
         }
+        SelectButton.gameObject.SetActive(false);
     }
     protected void SlectedState()
     {        
@@ -175,5 +185,13 @@ public class ButtonManager : MyBehaviour
             BuyButton.gameObject.SetActive(false);
             SelectButton.gameObject.SetActive(false);
         }
+    }
+    public void ClickPauseGame()
+    {
+        GameManager.Instance.PauseGame();
+    }
+    public void ClickResumeGame()
+    {
+        GameManager.Instance.ResumeGame();
     }
 }

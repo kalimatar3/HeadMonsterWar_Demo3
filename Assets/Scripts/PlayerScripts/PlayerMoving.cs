@@ -24,18 +24,6 @@ public Vector3 Move;
         CurrentSpeed = DefaultPlayerMovingSpeed   * ( 1 + ExtraSpeed) - FireMoveRate*DefaultPlayerMovingSpeed/100f;
         this.Move = new Vector3 (InputManager.Instance.MovingJoystick.Horizontal * CurrentSpeed, this.Mybody.velocity.y , InputManager.Instance.MovingJoystick.Vertical * CurrentSpeed);
         this.Mybody.velocity = Move;
-        if(InputManager.Instance.MovingJoystick.gameObject.activeInHierarchy) 
-        {
-            if(InputManager.Instance.MovingJoystick.Horizontal != 0 || InputManager.Instance.MovingJoystick.Vertical != 0)
-            {
-                this.transform.parent.rotation =  Quaternion.LookRotation(Mybody.velocity);
-            }
-        }
-        else 
-        {
-            this.Move = Vector3.zero;
-            this.Mybody.velocity = Vector3.zero;
-        }
         Vector3 ShootJoyVec = new Vector3 (InputManager.Instance.Shootingstick.Horizontal,0, InputManager.Instance.Shootingstick.Vertical);
         if(ShootJoyVec.magnitude > 0)
         {
@@ -44,6 +32,10 @@ public Vector3 Move;
         else 
         {
             FireMoveRate = 0;
+        }
+        if(!InputManager.Instance.MovingJoystick.gameObject.activeInHierarchy) 
+        {
+            this.Mybody.velocity = Vector3.zero;
         }
     }
     protected void StepSound()

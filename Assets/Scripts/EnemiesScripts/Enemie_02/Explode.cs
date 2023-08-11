@@ -11,6 +11,7 @@ public class Explode : EnemieAct
        {
         timer  = 0;
         gate = false;
+        SoundSpawner.Instance.Spawn(CONSTSoundsName.Boom,this.transform.parent.position,Quaternion.identity);
         EnemieActSpawner.Instance.Spawn(EnemieActSpawner.ActEnum.Explode.ToString(),this.transform.parent.position,this.transform.parent.rotation);
         EnemiesSpawner.Instance.DeSpawnToPool(this.transform.parent);
        }

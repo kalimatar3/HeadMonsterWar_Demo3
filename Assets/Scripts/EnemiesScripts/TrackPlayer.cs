@@ -13,8 +13,8 @@ public class TrackPlayer : MyBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadthisNav();
         this.LoadEnemyCTrl();
+        this.LoadthisNav();
     }
     protected void LoadEnemyCTrl()
     {
@@ -23,7 +23,6 @@ public class TrackPlayer : MyBehaviour
     protected void LoadthisNav()
     {
         thisNav = GetComponentInParent<NavMeshAgent>();
-        if(thisNav == null) return;
     }
     protected virtual void Track()
     {

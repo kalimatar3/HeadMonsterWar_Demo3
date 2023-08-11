@@ -31,3 +31,6 @@ MonoBehaviour:
   - Name: LockShotgun
     Cost: 100
     Available: 0
+  - Name: LockSniper
+    Cost: 100
+    Available: 0

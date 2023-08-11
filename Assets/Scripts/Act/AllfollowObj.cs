@@ -7,6 +7,6 @@ public class AllfollowObj : followObj
     protected override void follow()
     {
         base.follow();
-        this.transform.rotation = this.Obj.transform.rotation;
+        this.transform.rotation = Obj.transform.rotation;
     }
 }

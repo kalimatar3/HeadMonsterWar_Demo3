@@ -11,6 +11,7 @@ public class BossSpiderPunch : EnemieAct
        {
             timer  = 0;
             gate = false;
+            SoundSpawner.Instance.Spawn(CONSTSoundsName.SpiderAttack,transform.parent.position,Quaternion.identity);
             EnemieActSpawner.Instance.Spawn(EnemieActSpawner.ActEnum.BossPunch.ToString(),this.transform.parent.position,this.transform.parent.rotation);
        }
     }

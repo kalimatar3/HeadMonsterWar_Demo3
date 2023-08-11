@@ -6,23 +6,18 @@ using DG.Tweening;
 public class GunUIManager : MyBehaviour
 {
     [SerializeField] protected List<RectTransform> ListGuns;
+    [SerializeField] protected List<float> ListGunxPos;
     [SerializeField] protected int Index;
     [SerializeField] protected RectTransform Holder;
     [SerializeField] protected RectTransform Status;
     [SerializeField] protected float ChangepageTime;
     [SerializeField] protected List<Slider> ListStatusSlider; 
-    protected Vector3 BaseHolderPos;
-    protected struct status
-    {
-        float Dame;
-        float Range;
-        float Firerate;
-    }
+    [SerializeField] protected float BaseHolderPosX;
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadListGuns();
         this.LoadStatusSlider();
+        this.LoadListGuns();
     }
     protected void LoadStatusSlider()
     {
@@ -34,28 +29,57 @@ public class GunUIManager : MyBehaviour
                 ListStatusSlider.Add(element.GetComponentInChildren<Slider>());
             }
         }
-    }   
+    }
     protected void LoadListGuns()
     {
         if(ListGuns.Count > 0 ) return;
-        foreach(RectTransform element in this.transform)
+        float basePOs = Holder.localPosition.x;
+        foreach(RectTransform element in Holder)
         {
             ListGuns.Add(element);
+            ListGunxPos.Add(basePOs);
+            basePOs -= 1830;
         }
     }
     protected override void Start()
     {
         base.Start();
-        BaseHolderPos = Holder.localPosition;
-        this.Index = 0; 
+        StartCoroutine(this.TakeStartIndexDelay());
+    }
+    protected void OnEnable()
+    {
+        this.HolderMoveTo(Index);
         this.SelectGun();
+    }
+    protected IEnumerator TakeStartIndexDelay()
+    {   
+        yield return new WaitUntil(predicate :()=>
+        {
+            if(DataManager.Instance.CurrentGunName == null) return false;
+            return true;
+        });
+        this.TakeStartIndex();
+        this.HolderMoveTo(Index);
+        this.SelectGun();
+    }
+    protected void TakeStartIndex()
+    {
+        for(int i = 0 ; i < GunCtrl.Instance.ListGuns.Count ; i++)
+        {
+            if(ListGuns[i].name == DataManager.Instance.CurrentGunName)
+            {
+                Index = i;
+                return;
+            }
+        }
+        Index = 0;
     }
     public void IncreaseIndex()
     {
         if(Index < ListGuns.Count-1)
         {
             this.Index = (this.Index + 1);
-            this.HodlerMoveLeft();
+            HolderMoveTo(Index);
             this.SelectGun();
         }
     }
@@ -64,19 +88,13 @@ public class GunUIManager : MyBehaviour
         if(Index > 0) 
         {
             this.Index = (this.Index - 1);
-            this.HolderMoveright();
+            HolderMoveTo(Index);
             this.SelectGun();
         }
     }
-    protected void HodlerMoveLeft()
+    protected void HolderMoveTo(int index)
     {
-        Holder.transform.DOLocalMoveX(BaseHolderPos.x -1830 ,ChangepageTime).SetEase(Ease.Linear);
-        BaseHolderPos.x -= 1830;       
-    }
-    protected void HolderMoveright()
-    {
-        Holder.transform.DOLocalMoveX(BaseHolderPos.x +1830 ,ChangepageTime).SetEase(Ease.Linear); 
-        BaseHolderPos.x += 1830;    
+        Holder.transform.DOLocalMoveX( ListGunxPos[index],ChangepageTime).SetEase(Ease.Linear);
     }
     protected void SelectGun()
     {

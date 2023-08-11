@@ -16,6 +16,8 @@ public class DataManager : MyBehaviour
         public List<ShopData> ListShopData;
         public List<UpgradeableData> ListUpGradeAbleData;
         public List<DropItemData> ListDropItemData;
+        public string LastTime;
+        public float Lasthours;
     }
     [Serializable]
     public class ShopData
@@ -53,14 +55,13 @@ public class DataManager : MyBehaviour
     public  float MusicVolume,SoundEffectVolume;
     public List<UpgradeableData> ListUpGradeAbleData;
     public List<DropItemData> ListDropItemData;
-    public List<ShopData> ListShopData; 
+    public List<ShopData> ListShopData;
+    public String LastTime;
     [Header("SO DATA")]
     [SerializeField] protected ShopSO ShopSO; 
     public List<EnemiesSO> ListEnemieSO;
-    public List<BulletsSO> ListBulletsSO;
     public List<CostSO> ListCostSO;
     public List<DropItemSO> ListDropItemSO;
-    public float test;
     protected override void Awake()
     {
         base.Awake();
@@ -74,6 +75,8 @@ public class DataManager : MyBehaviour
     protected override void Start()
     {
         base.Start();
+        this.LastTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        Debug.Log(LastTime);
         StartCoroutine(LoadListUpGradeAbledelay());
         StartCoroutine(LoadListDropItemDatadelay());
         StartCoroutine(LoadListShopDatadelay());
@@ -84,7 +87,6 @@ public class DataManager : MyBehaviour
         base.LoadComponents();
         this.LoadShopSO();
         this.LoadEnemieSO();
-        this.LoadBulletSO();
         this.LoadListCostSO();
         this.LoadListDropSO();
     }
@@ -156,16 +158,6 @@ public class DataManager : MyBehaviour
             for(int i = 0 ; i < array.Length; i ++ )
             {
                 ListEnemieSO.Add(array[i]);
-            }
-    }
-    protected void LoadBulletSO()
-    {
-        if(ListBulletsSO.Count > 0 ) return;
-            string rePath = "Bullets/";
-            BulletsSO[]  array = Resources.LoadAll<BulletsSO>(rePath);
-            for(int i = 0 ; i < array.Length; i ++ )
-            {
-                ListBulletsSO.Add(array[i]);
             }
     }
     protected virtual void LoadShopSO()
@@ -268,7 +260,6 @@ public class DataManager : MyBehaviour
                 if(Name == element.List[i].Name)
                 {
                      if(GetUpgradenumberfromUGAD(Name) >= GetmaxUpgradefromUGAD(Name) -1) return 0;
-                     test = GetUpgradenumberfromUGAD(Name);
                      return element.List[0].Cost[GetUpgradenumberfromUGAD(Name)];
                 }
             }
@@ -355,12 +346,14 @@ public class DataManager : MyBehaviour
         this.ListDropItemData = obj.ListDropItemData;
         this.ListShopData = obj.ListShopData;
         this.CurrentLevel = obj.CurrentLevel;
+        this.LastTime = obj.LastTime;
     }
     public virtual void ClearJson()
     {
         this.CurrentMap = "Map1";
         this.CurrentModelName = "Model0";
         this.CurrentGunName = "Ak47";
+        this.LastTime = "2023-08-09 15:30:45";
         this.Gold = 99999;
         this.ListUpGradeAbleData = null;
         this.ListDropItemData = null;

@@ -17,40 +17,35 @@ MonoBehaviour:
   CanThroughObj: 1
   HitExplosionName: ShotgunHitExplosion
   FireExplosionName: ShotgunFireExplosion
+  bulletSpeed: 50
   GunUpgrade:
-  - Cost: 1
-    MaxAmmo: 3
+  - MaxAmmo: 2
     Firerate: 0.5
     Reloadtime: 2
-    Dame: 1
-    Range: 0
-  - Cost: 1
-    MaxAmmo: 3
+    Dame: 100
+    Range: 10
+  - MaxAmmo: 2
+    Firerate: 0.5
+    Reloadtime: 1.5
+    Dame: 100
+    Range: 20
+  - MaxAmmo: 2
+    Firerate: 0.5
+    Reloadtime: 1.5
+    Dame: 100
+    Range: 10
+  - MaxAmmo: 2
     Firerate: 0.5
     Reloadtime: 1.5
     Dame: 1
-    Range: 0
-  - Cost: 1
-    MaxAmmo: 4
+    Range: 10
+  - MaxAmmo: 2
     Firerate: 0.5
     Reloadtime: 1.5
     Dame: 1
-    Range: 0
-  - Cost: 1
-    MaxAmmo: 4
+    Range: 10
+  - MaxAmmo: 2
     Firerate: 0.5
     Reloadtime: 1.5
-    Dame: 1
-    Range: 0
-  - Cost: 1
-    MaxAmmo: 4
-    Firerate: 0.5
-    Reloadtime: 1.5
-    Dame: 1
-    Range: 0
-  - Cost: 1
-    MaxAmmo: 4
-    Firerate: 0.5
-    Reloadtime: 1.5
-    Dame: 1
-    Range: 0
+    Dame: 100
+    Range: 10

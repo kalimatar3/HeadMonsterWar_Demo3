@@ -17,9 +17,8 @@ public class SpeedUp : BufftoPlayer
     }
     protected void OnEnable()
     {
-       // if(instance != this && instance.transform.parent.gameObject.activeInHierarchy) Destroy(this.transform.parent.gameObject);
+        if(instance != this && instance.transform.parent.gameObject.activeInHierarchy) Destroy(this.transform.parent.gameObject);
     }
-
     protected override void SendDametoObj(Transform obj)
     {
         PlayerReciver playerReciver =  obj.transform.GetComponent<PlayerReciver>();

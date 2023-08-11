@@ -17,7 +17,7 @@ public class WinScript : MyBehaviour
     {        
         SoundSpawner.Instance.Spawn(CONSTSoundsName.Win,Vector3.zero,Quaternion.identity);
         PanelCtrl.Instance.HirePanel("GameplayPanel");
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(5f);
         this.Replaying();
     } 
 }

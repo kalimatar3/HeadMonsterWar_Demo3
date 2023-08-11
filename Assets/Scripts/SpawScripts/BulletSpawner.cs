@@ -26,20 +26,6 @@ public class BulletSpawner : Spawner
             Bulletname[i] = prefabs[i].name;
         }
     }
-    public override Transform Spawn(string PrefabName, Vector3 position, Quaternion rotation)
-    {
-        Transform newPre = base.Spawn(PrefabName,position,rotation);
-        DealToEnemies dealToEnemies = newPre.GetComponentInChildren<DealToEnemies>();
-        foreach(BulletsSO ThisSO in DataManager.Instance.ListBulletsSO)
-        {
-            if(ThisSO.name == PrefabName)
-            {
-                dealToEnemies.CanThroughObj = ThisSO.CanThroughObj;
-                dealToEnemies.dealnumber = ThisSO.Dame ;
-            }
-        }
-        return newPre;
-    }
     protected override void Awake()
     {
         base.Awake();

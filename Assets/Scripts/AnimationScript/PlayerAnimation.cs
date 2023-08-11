@@ -27,8 +27,9 @@ public class PlayerAnimation : MyBehaviour
     }
     protected void Reloading()
     {
-      PlayerTopAnimator.SetFloat(StringConts.PlayerReload,playerController.GunCtrl.Shooting.reloadtimer);
-      PlayerUnderAnimator.SetFloat(StringConts.PlayerReload,playerController.GunCtrl.Shooting.reloadtimer);
+        if(GunCtrl.Instance.Shooting == null) return;
+        PlayerTopAnimator.SetFloat(StringConts.PlayerReload,playerController.GunCtrl.Shooting.reloadtimer);
+        PlayerUnderAnimator.SetFloat(StringConts.PlayerReload,playerController.GunCtrl.Shooting.reloadtimer);
     }
     protected void IsDead()
     {

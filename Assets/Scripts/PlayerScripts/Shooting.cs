@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Shooting : PlayerAct
 {
+    protected GunCtrl gunCtrl;
     [Header("Fire")]
     [SerializeField] protected Transform Guntip;
     [SerializeField] protected float FireRate,Dame;
     [Header(" Ammo ")]
     [SerializeField] protected float Reloadtime;
     [SerializeField] public float MaxAmmo,CurrentAmmo;
-    [HideInInspector] public float reloadtimer,firetimer;
-    protected GunCtrl gunCtrl;
-    protected string Bulletname,ThisExplosionFireName,ThisExplosionHitName;
+    public float reloadtimer,firetimer;
+    [SerializeField] protected string Bulletname,ThisExplosionFireName,ThisExplosionHitName;
     protected Transform ThisBullet;
+    protected float BulletSpeed,Range;
     protected bool CanThroughObj;
     protected bool Reloadgate;
     // BUFF
@@ -24,12 +25,20 @@ public class Shooting : PlayerAct
     {
         base.LoadComponents();
         this.LoadGunCtrl();
+    }
+    protected override void Start()
+    {
+        base.Start();
+        this.reborn();
+    }
+    protected  void OnEnable()
+    {
         this.reborn();
     }
     protected void LoadGunCtrl()
     {
         if(gunCtrl != null) return;
-        gunCtrl = GetComponentInParent<GunCtrl>();
+        gunCtrl = this.transform.parent.GetComponentInParent<GunCtrl>();
     }
     public virtual void reborn()
     {
@@ -77,6 +86,8 @@ public class Shooting : PlayerAct
                 ThisExplosionFireName = gunCtrl.ListGunSO[i].FireExplosionName;
                 ThisExplosionHitName = gunCtrl.ListGunSO[i].HitExplosionName;
                 CanThroughObj = gunCtrl.ListGunSO[i].CanThroughObj;
+                this.BulletSpeed = gunCtrl.ListGunSO[i].bulletSpeed;
+                this.Range = gunData.Range;
                 FireRate  = gunData.Firerate;
                 MaxAmmo = gunData.MaxAmmo;
                 Reloadtime = gunData.Reloadtime;
@@ -85,7 +96,7 @@ public class Shooting : PlayerAct
         } 
         if(CurrentAmmo > MaxAmmo) CurrentAmmo = MaxAmmo;
   }
-    protected void shotting()
+    protected virtual void Shot()
     {
         if(this.Reloadgate) return;
         if(InputManager.Instance.Shootingstick.gameObject.activeInHierarchy)
@@ -97,21 +108,30 @@ public class Shooting : PlayerAct
                 if(firetimer > FireRate)
                 {
                     firetimer = 0;
-                    ThisBullet =  BulletSpawner.Instance.Spawn(Bulletname,Guntip.position,Guntip.rotation);
-                    EffectSpawner.Instance.Spawn(ThisExplosionFireName,Guntip.position,Guntip.rotation);
-                    ThisBullet.GetComponentInChildren<DealToEnemies>().CanThroughObj = this.CanThroughObj;
-                    ThisBullet.GetComponentInChildren<DealToEnemies>().dealnumber = this.Dame;
-                    ThisBullet.GetComponentInChildren<DealToEnemies>().dealnumber = ThisBullet.GetComponentInChildren<DealToEnemies>().dealnumber*(1 + ExtraDame);
-                    ThisBullet.GetComponentInChildren<DealToEnemies>().ExplosionHitName = ThisExplosionHitName;
-                    ThisBullet.GetComponentInChildren<DealToEnvironments>().ExplosionHitName = ThisExplosionHitName;
+                    this.ThroughBulet();
                     CurrentAmmo --;
                 }
             }
+            else 
+            {
+                firetimer = 0;
+            }
         }
     }
-    public void RestoreGun()
+    protected virtual void ThroughBulet()
     {
-        shootingVector = Vector3.zero;
+        ThisBullet =  BulletSpawner.Instance.Spawn(Bulletname,Guntip.position,Guntip.rotation);
+        Transform thisFireEffect = EffectSpawner.Instance.Spawn(ThisExplosionFireName,Guntip.position,Guntip.rotation);
+        thisFireEffect.GetComponentInChildren<followObj>().Obj = this.Guntip;
+        DealToEnemies Dealer = ThisBullet.GetComponentInChildren<DealToEnemies>();
+        if(Dealer == null) Debug.LogWarning(ThisBullet + "dont have DealtoEnnemy");
+        ThisBullet.GetComponentInChildren<BulletDeSpawn>().DistanceToDepSpawn = this.Range;
+        ThisBullet.GetComponentInChildren<Through>().speed = this.BulletSpeed;
+        Dealer.CanThroughObj = this.CanThroughObj;
+        Dealer.dealnumber = this.Dame;
+        Dealer.dealnumber = ThisBullet.GetComponentInChildren<DealToEnemies>().dealnumber*(1 + ExtraDame);
+        Dealer.ExplosionHitName = ThisExplosionHitName;
+        ThisBullet.GetComponentInChildren<DealToEnvironments>().ExplosionHitName = ThisExplosionHitName;
     }
     protected void DameUp(float Value,float time)
     {
@@ -135,7 +155,7 @@ public class Shooting : PlayerAct
     protected override void Action()
     {
         this.DameUp(BoostValue,BoostTime);
-        //this.Getbulletdata();
+        this.Getbulletdata();
         this.AutoReload();
         this.Reload();
         base.Action();
@@ -143,7 +163,7 @@ public class Shooting : PlayerAct
     protected override void Doing()
     {
         base.Doing();
-       // this.shotting();
+       this.Shot();
     }
     protected override bool CanDo()
     {
