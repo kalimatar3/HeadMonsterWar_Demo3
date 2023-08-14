@@ -57,6 +57,7 @@ public class DataManager : MyBehaviour
     public List<DropItemData> ListDropItemData;
     public List<ShopData> ListShopData;
     public String LastTime;
+    public bool CanshowDailyReward;
     [Header("SO DATA")]
     [SerializeField] protected ShopSO ShopSO; 
     public List<EnemiesSO> ListEnemieSO;
@@ -76,7 +77,6 @@ public class DataManager : MyBehaviour
     {
         base.Start();
         this.LastTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        Debug.Log(LastTime);
         StartCoroutine(LoadListUpGradeAbledelay());
         StartCoroutine(LoadListDropItemDatadelay());
         StartCoroutine(LoadListShopDatadelay());

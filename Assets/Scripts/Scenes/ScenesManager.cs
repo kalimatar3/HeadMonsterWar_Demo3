@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Threading.Tasks;
 public class ScenesManager : MyBehaviour
 {
+    
     protected static ScenesManager instance;
     public static ScenesManager Instance { get => instance;}
     [SerializeField] protected Transform LoadingScene;
@@ -23,6 +24,11 @@ public class ScenesManager : MyBehaviour
             Destroy(gameObject);
         }
     }
+    protected override void Start()
+    {
+        base.Start();
+        ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
+    } 
     public async void LoadScene(string SceneName)
     {
        var Scene = SceneManager.LoadSceneAsync(SceneName);

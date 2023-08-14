@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MyBehaviour
 {
@@ -14,7 +15,7 @@ public class GameManager : MyBehaviour
         if(instance != this && instance != null) Destroy(this);
         else instance = this;
     }
-    protected IEnumerator FakeUpdate()
+    protected IEnumerator TimeCounting()
     {
         foreach(Transform panel in PanelCtrl.Instance.ListPanels)
         {
@@ -22,18 +23,21 @@ public class GameManager : MyBehaviour
           {
             while(panel.gameObject.activeInHierarchy)
             {
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(0.1f);
+                ButtonManager.Instance.DailyRewardButton.gameObject.SetActive(DataManager.Instance.CanshowDailyReward);
                 timepassed = DateTime.Now - DateTime.Parse(DataManager.Instance.LastTime);
-                Debug.Log(timepassed.TotalHours);
                 if(timepassed.TotalHours >= 24f)
                 {
-                    ButtonManager.Instance.DailyRewardButton.gameObject.SetActive(true);
-                    DataManager.Instance.LastTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    Lsmanager.Instance.SaveGame();
+                    DataManager.Instance.CanshowDailyReward = true;
                 }
             }
           }
         }
+    }
+    public void Replay()
+    {
+      ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
+      this.StartCoroutine(MapManager.Instance.DelayLoadMap());
     }
     public void PauseGame()
     {
@@ -48,7 +52,7 @@ public class GameManager : MyBehaviour
     protected override void Start()
     {
         base.Start();
-        this.StartCoroutine(this.FakeUpdate());
+        this.StartCoroutine(this.TimeCounting());
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Timers;
+using System;
 public class ButtonManager : MyBehaviour
 {
     protected static ButtonManager instance;
@@ -63,14 +63,23 @@ public class ButtonManager : MyBehaviour
     }
     public void Revive()
     {
-        EffectSpawner.Instance.Spawn(CONSTEffect.ReviveEffect,PlayerController.Instance.transform.position,Quaternion.identity);
-        PlayerController.Instance.PlayerReciver.canRevise();
-        SoundSpawner.Instance.Spawn(CONSTSoundsName.Revive,Vector3.zero,Quaternion.identity);
         this.Reborn();
+        EffectSpawner.Instance.Spawn(CONSTEffect.ReviveEffect,PlayerController.Instance.transform.position,Quaternion.identity);
+        SoundSpawner.Instance.Spawn(CONSTSoundsName.Revive,Vector3.zero,Quaternion.identity);
+        this.StartCoroutine(CanreviveDelay());
+    }
+    protected IEnumerator CanreviveDelay()
+    {
+        yield return new WaitUntil(predicate:()=>
+        {
+            if(PlayerController.Instance.PlayerReciver.CurrentHp == 0) return false;
+            return true;
+        });
+        PlayerController.Instance.PlayerReciver.canRevise();
     }
     public void Replay()
     {
-        PlayerController.Instance.PlayerReciver.Replay();
+        GameManager.Instance.Replay();
     }
     public void Reload()
     {
@@ -122,10 +131,12 @@ public class ButtonManager : MyBehaviour
         }
         this.ApprearButton.gameObject.SetActive(false);
     }
-    public void DailyrewardButton()
+    public void ClickDailyReward()
     {
+        DataManager.Instance.LastTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        DataManager.Instance.CanshowDailyReward = false;
         CoinUISpawner.Instance.CurrentNumberofCoins = 100;
-        ButtonManager.instance.DailyRewardButton.gameObject.SetActive(false);
+        Lsmanager.Instance.SaveGame();
     }
     protected void FixedUpdate()
     {

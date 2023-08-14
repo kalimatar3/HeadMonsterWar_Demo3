@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerReciver : DameReciver
 {
@@ -48,31 +47,21 @@ public class PlayerReciver : DameReciver
             }
             if(!CanRevise)
             {
-                PanelCtrl.Instance.HirePanel("GameplayPanel");
-                this.Replay();
+                PanelCtrl.Instance.ShowPanel("GameOverPanel");
             }
         } 
     }
-    public void Replay()
+    public override void ReBorn()
     {
-        StartCoroutine(DelayReplayByGameOver());
+        this.StartCoroutine(this.RebornDelay());
     }
-    protected void Replaying()
+    protected IEnumerator RebornDelay()
     {
-      ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
-      this.StartCoroutine(MapManager.Instance.DelayLoadMap());
-    }
-    protected IEnumerator DelayReplayByGameOver()
-    {
-        SoundSpawner.Instance.Spawn(CONSTSoundsName.GameOver,Vector3.zero,Quaternion.identity);
-        PanelCtrl.Instance.HirePanel("RevisePannel");
-        PanelCtrl.Instance.ShowPanel("GameOverPanel");
-        yield return new WaitForSeconds(3f);
-        this.Replaying();
-    } 
-
-    public override void  ReBorn()
-    {
+        yield return new WaitUntil(predicate:()=>
+        {
+            if(DataManager.Instance.ListUpGradeAbleData == null) return false;
+            return true;
+        });
         this.MaxHp = playerController.playerSO.PlayerUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD("Hp")].MaxHp;
         base.ReBorn();
     }

@@ -6,7 +6,8 @@ public class ModelUIManager : MyBehaviour
 {
     protected static ModelUIManager instance;
     public static ModelUIManager Instance { get => instance ;}
-    [SerializeField] public List<Transform> ListModels;
+    [SerializeField] public List<Transform> ListModels,ListGuns;
+    [SerializeField] protected RectTransform Models,Guns;
     protected override void Awake()
     {
         base.Awake();
@@ -17,12 +18,13 @@ public class ModelUIManager : MyBehaviour
     {
         base.LoadComponents();
         this.LoadListModel();
+        this.LoadListGun();
     }
     protected void OnEnable()
     {
-        this.StartCoroutine(this.DelayActiveModel());
+        this.StartCoroutine(this.DelayActive());
     }
-    protected IEnumerator DelayActiveModel()
+    protected IEnumerator DelayActive()
     {
         yield return new WaitUntil( predicate: ()=>
         {
@@ -30,15 +32,25 @@ public class ModelUIManager : MyBehaviour
             else return true;
         });
         this.ActiveModel(DataManager.Instance.CurrentModelName); 
+        this.ActiveGun(DataManager.Instance.CurrentGunName);
     }
     protected void LoadListModel()
     {
         if(ListModels.Count > 0 ) return;
-        foreach(Transform element in this.transform)
+        foreach(Transform element in this.Models)
         {
             ListModels.Add(element);
         }
     }
+        protected void LoadListGun()
+    {
+        if(ListGuns.Count > 0 ) return;
+        foreach(Transform element in this.Guns)
+        {
+            ListGuns.Add(element);
+        }
+    }
+    
     public void ActiveModel(string Modelname)
     {
         foreach(Transform element in ListModels)
@@ -50,4 +62,16 @@ public class ModelUIManager : MyBehaviour
             }
         }
     }
+    public void ActiveGun(string GunName)
+    {
+        foreach(Transform element in ListGuns)
+        {
+            element.gameObject.SetActive(false);
+            if(GunName == element.name)
+            {
+                element.gameObject.SetActive(true);
+            }
+        }
+    }
+
 }

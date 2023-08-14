@@ -48,6 +48,7 @@ public class GunUIManager : MyBehaviour
     }
     protected void OnEnable()
     {
+        StartCoroutine(this.TakeStartIndexDelay());
         this.HolderMoveTo(Index);
         this.SelectGun();
     }
@@ -111,5 +112,12 @@ public class GunUIManager : MyBehaviour
             }
             ButtonManager.Instance.Currentbutton = ListGuns[Index];
        }
+       this.SliderStatus();
+    }
+    protected void SliderStatus()
+    {
+        ListStatusSlider[0].value = GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Dame/100;
+        ListStatusSlider[1].value = GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Range/100;
+        ListStatusSlider[2].value = GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Firerate;
     }
 }

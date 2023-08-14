@@ -15,12 +15,13 @@ public class CoinFly : MyBehaviour
     }
     protected IEnumerator Fly()
     {        
-        yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.5f);
             this.transform.parent.DOMove(this.StartPos,(StartPos-SpawnPos).magnitude/SpeedtoStart);
             yield return new WaitForSeconds((StartPos-SpawnPos).magnitude/SpeedtoStart);
             this.transform.parent.DOMove(this.EndPos,(EndPos-StartPos).magnitude/SpeedtoEnd);
             yield return new WaitForSeconds((EndPos-StartPos).magnitude/SpeedtoEnd);
             DataManager.Instance.IcrGold((int)(CoinUISpawner.Instance.CurrentNumberofCoins/5f));
+            SoundSpawner.Instance.Spawn(CONSTSoundsName.PickCoin,this.transform.position,Quaternion.identity);
             CoinUISpawner.Instance.DeSpawnToPool(this.transform.parent);
 
     }

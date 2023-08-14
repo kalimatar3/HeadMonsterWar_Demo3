@@ -6,9 +6,9 @@ public class GunCtrl : MyBehaviour
 {
     protected static GunCtrl instance;
     public static GunCtrl Instance { get => instance ;}
-    [SerializeField] protected Shooting shooting;
     public List<Transform> ListGuns;
     public List<GunsSO> ListGunSO;
+    [SerializeField] protected Shooting shooting;
     public Shooting Shooting { get => shooting;}
     protected override void LoadComponents()
     {

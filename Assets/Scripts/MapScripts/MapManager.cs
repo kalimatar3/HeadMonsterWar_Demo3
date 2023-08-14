@@ -33,7 +33,7 @@ public class MapManager : MyBehaviour
         thisMap = Instantiate(Resources.Load<Transform>(path));
         thisMap.name = Mapname;
         thisMap.transform.SetParent(this.transform);
-        DontDestroyOnLoad(thisMap.transform.gameObject);
+        //DontDestroyOnLoad(thisMap.transform.gameObject);
         Transform bossspawnPos = thisMap.transform.Find("BossSpawnPos");
         foreach(Transform element in bossspawnPos)
         {
