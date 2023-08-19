@@ -36,6 +36,15 @@ public class LevelManager : MyBehaviour
     protected override void Start()
     {
         base.Start();
+        this.StartCoroutine(LoadLevelDelay());
+    }
+    protected IEnumerator LoadLevelDelay()
+    {
+        yield return new WaitUntil(predicate:()=>
+        {
+            if(DataManager.Instance == null) return false;
+            return true;
+        });
         for(int i = 0 ; i < ListLevels.Count; i ++)
         {
             ListLevels[i].gameObject.SetActive(false);
@@ -44,7 +53,8 @@ public class LevelManager : MyBehaviour
     }
     public void NextLevel()
     {
-        DataManager.Instance.CurrentLevel = ( DataManager.Instance.CurrentLevel + 1) % ListLevels.Count;
+        DataManager.Instance.CurrentLevel = ( DataManager.Instance.CurrentLevel + 1 );
+        if(DataManager.Instance.CurrentLevel == ListLevels.Count) DataManager.Instance.CurrentLevel = 1;
         Lsmanager.Instance.SaveGame();
     }
 }

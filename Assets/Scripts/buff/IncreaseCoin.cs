@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class IncreaseCoin : BufftoPlayer
@@ -17,11 +18,20 @@ public class IncreaseCoin : BufftoPlayer
     {
         yield return new WaitUntil(predicate : () =>
         {
-            thisrotation.z = ((int)thisrotation.z + 1) % 3 ;
-            this.transform.parent.GetChild(0).rotation = thisrotation;
+            Tweener tweener =  this.transform.DORotate(new Vector3(360,360,0),0.5f,RotateMode.FastBeyond360)
+            .SetLoops(-1,LoopType.Restart)
+            .SetRelative()
+            .SetEase(Ease.Linear);
             this.transform.parent.Translate(Vector3.up * Time.deltaTime * 1f * 10);
-            if(this.transform.parent.position.y < 5) return false;
-            else return true;
+            if(this.transform.parent.position.y < 7) return false;
+            else 
+            {
+            this.transform.DORotate(new Vector3(90,0,0),0f,RotateMode.FastBeyond360)
+            .SetLoops(-1,LoopType.Restart)
+            .SetRelative()
+            .SetEase(Ease.Linear);
+                return true;
+            }
         }); 
         base.SendDametoObj(obj);
     }

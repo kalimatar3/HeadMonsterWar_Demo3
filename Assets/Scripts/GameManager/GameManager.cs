@@ -1,8 +1,9 @@
-using System.Collections;
+        using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using System.ComponentModel.Design.Serialization;
 
 public class GameManager : MyBehaviour
 {
@@ -34,6 +35,25 @@ public class GameManager : MyBehaviour
           }
         }
     }
+    protected IEnumerator GameModeDelay()
+    {
+        yield return new WaitUntil(predicate:()=>
+        {
+            if(DataManager.Instance == null) return false;
+            return true;
+        });
+        this.GameMode();
+    }
+    protected void GameMode()
+    {
+        if(DataManager.Instance.TutorialLevel >= 2) DataManager.Instance.GamePlayMode = true;
+        if(DataManager.Instance.GamePlayMode)
+        {
+            TutorialUI.Instance.ActiveAll();
+            PanelCtrl.Instance.HirePanel("TutorialPanel");
+            PanelCtrl.Instance.ShowPanel("MainMenuPannel");
+        }
+    }
     public void Replay()
     {
       ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
@@ -53,6 +73,7 @@ public class GameManager : MyBehaviour
     {
         base.Start();
         this.StartCoroutine(this.TimeCounting());
+        this.StartCoroutine(this.GameModeDelay());
     }
 
 }

@@ -40,6 +40,14 @@ public class SpawnEnemies : MyBehaviour
         else  ranPos = new Vector3 (thisradius,0,- Mathf.Sqrt(Randradius * Randradius - thisradius* thisradius));
         return PlayerController.Instance.transform.position + ranPos;
     }
+    protected void AddtoListEnemies(Transform Enemy)
+    {
+        for(int i = 0 ; i < ListEnemies.Count ; i ++)
+        {
+            if(ListEnemies[i] == Enemy) return;
+        }
+        ListEnemies.Add(Enemy);
+    }
     protected void spawnenemie()
     {
         thistime  = Random.Range((int)TimeToSpawn[thisEnemie].x,(int)TimeToSpawn[thisEnemie].y +1); 
@@ -54,7 +62,7 @@ public class SpawnEnemies : MyBehaviour
                 ThisPos = MapManager.Instance.ListBossSapwnPos[rdPos]; 
             }
             else ThisPos = RandomPosAroundPLayer(DisAroundPlayer[thisEnemie]);
-            ListEnemies.Add(EnemiesSpawner.Instance.Spawn(EnemiesSpawner.Instance.EnemiesName[thisEnemie],ThisPos,Quaternion.identity));
+            AddtoListEnemies(EnemiesSpawner.Instance.Spawn(EnemiesSpawner.Instance.EnemiesName[thisEnemie],ThisPos,Quaternion.identity));
             NumberOfEachEnemy[thisEnemie]--;
         }
         if(EnemiesSpawner.Instance.ListEnemiesDefectSpawn.Count > 0 )
@@ -64,7 +72,6 @@ public class SpawnEnemies : MyBehaviour
                 if(EnemiesSpawner.Instance.ListEnemiesDefectSpawn[i].name == EnemiesSpawner.Instance.EnemiesName[thisEnemie])
                 {
                     NumberOfEachEnemy[thisEnemie]++;
-                    MaxNumberofEnemies ++;
                     EnemiesSpawner.Instance.ListEnemiesDefectSpawn.Remove(EnemiesSpawner.Instance.ListEnemiesDefectSpawn[i]);
                 }
             }
@@ -90,7 +97,6 @@ public class SpawnEnemies : MyBehaviour
                 if(BossSpawner.Instance.ListEnemiesDefectSpawn[i].name == BossSpawner.Instance.ListBossesname[thisEnemie])
                 {
                     NUmberOfEachBoss[thisEnemie]++;
-                    MaxNumberofEnemies ++;
                     BossSpawner.Instance.ListEnemiesDefectSpawn.Remove(BossSpawner.Instance.ListEnemiesDefectSpawn[i]);
                 }
             }

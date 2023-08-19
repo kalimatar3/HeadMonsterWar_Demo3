@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TutorialManager : GameManager
 {
+    public int Index;
     protected override void Start()
     {
+        
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HolderManager : MyBehaviour
 {
-    [SerializeField] protected List<Transform> ListHolder;
+    [SerializeField] public List<Transform> ListHolder;
     protected static HolderManager instance;
-    public static HolderManager Instance { get => instance ;}
+    public static HolderManager Instance { get => instance ;} 
     protected override void Awake()
     {
         base.Awake();

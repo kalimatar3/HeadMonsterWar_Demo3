@@ -11,13 +11,16 @@ public class DataManager : MyBehaviour
         public string CurrentMap;
         public string CurrentModelName ;
         public string CurrentGunName;
+        public int TutorialLevel;
         public int CurrentLevel;
+        public bool GamePlayMode;
         public  float MusicVolume,SoundEffectVolume;
+        public string LastTime;
+        public bool FistCamMove;
+        public float Lasthours;
         public List<ShopData> ListShopData;
         public List<UpgradeableData> ListUpGradeAbleData;
         public List<DropItemData> ListDropItemData;
-        public string LastTime;
-        public float Lasthours;
     }
     [Serializable]
     public class ShopData
@@ -52,12 +55,15 @@ public class DataManager : MyBehaviour
     public string CurrentModelName;
     public  string CurrentGunName;
     public int CurrentLevel;
+    public int TutorialLevel;
+    public bool GamePlayMode;
     public  float MusicVolume,SoundEffectVolume;
+    public bool CanshowDailyReward;
+    public bool FistCamMove;
+    public String LastTime;
     public List<UpgradeableData> ListUpGradeAbleData;
     public List<DropItemData> ListDropItemData;
     public List<ShopData> ListShopData;
-    public String LastTime;
-    public bool CanshowDailyReward;
     [Header("SO DATA")]
     [SerializeField] protected ShopSO ShopSO; 
     public List<EnemiesSO> ListEnemieSO;
@@ -346,7 +352,9 @@ public class DataManager : MyBehaviour
         this.ListDropItemData = obj.ListDropItemData;
         this.ListShopData = obj.ListShopData;
         this.CurrentLevel = obj.CurrentLevel;
+        this.TutorialLevel = obj.TutorialLevel;
         this.LastTime = obj.LastTime;
+        this.FistCamMove = obj.FistCamMove;
     }
     public virtual void ClearJson()
     {
@@ -359,6 +367,9 @@ public class DataManager : MyBehaviour
         this.ListDropItemData = null;
         this.ListShopData = null;
         this.CurrentLevel = 0;
+        this.FistCamMove = false;
+        this.GamePlayMode = false;
+        this.TutorialLevel = 0;
    }
    protected IEnumerator UnlockDelay()
    {

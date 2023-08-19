@@ -83,7 +83,8 @@ public class PlayerReciver : DameReciver
             else
             {
                 PanelCtrl.Instance.ShowPanel("TakeDamePanel");
-                base.DeductHp(dame);
+               if(!DataManager.Instance.GamePlayMode) base.DeductHp(10);
+                else base.DeductHp(dame);
             }
             StartCoroutine(TakeDameDelay());
         }

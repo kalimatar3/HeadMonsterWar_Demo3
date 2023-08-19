@@ -32,7 +32,6 @@ public class EnemiesSpawner : Spawner
         Transform HpbarTrans =  SpawnEnemieHpbar(newPre);
         HpbarTrans.transform.localScale = newPre.localScale;
         HpbarTrans.GetComponentInChildren<followObj>().Obj = newPre;
-        HpbarTrans.gameObject.SetActive(false);
         HpbarTrans.gameObject.SetActive(true);
         HpbarTrans.GetComponentInChildren<DeSpawnHpbar>().Obj = newPre;
         EnemieHpbar Hpbar = HpbarTrans.GetComponentInChildren<EnemieHpbar>();

@@ -1,18 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class CameraFollow : followObj
 {
-    [SerializeField] protected Vector3 DefaultCamPOS,FireCamPOS;
+    [SerializeField] public Vector3 DefaultCamPOS,FireCamPOS,CutSceneCamPos;
     [SerializeField] protected Quaternion DefaultCamROS;
     protected override void Start()
     {
         base.Start();
+        this.StartCoroutine(TutorialCam());
         this.Forcus(this.transform.parent,0);
     }
     protected override void follow()
-    {
+    {           
+        if(DataManager.Instance.FistCamMove == false) return;
         if(Obj == null) return;
         if(Obj == PlayerController.Instance.transform)
         {
@@ -27,6 +28,25 @@ public class CameraFollow : followObj
         else
         {
             this.ForcustoBoss();
+        }
+    }
+    protected IEnumerator TutorialCam()
+    {
+        yield return new WaitUntil(predicate:()=>
+        {
+            if(DataManager.Instance == null) return false;
+            return true;
+        });
+        if(!DataManager.Instance.FistCamMove)
+        {
+            yield return new WaitUntil(predicate:()=>
+            {
+                if(PlayerController.Instance.transform != Obj) return false;
+                return true;
+            });
+            this.transform.parent.DOMove(Obj.transform.position + CutSceneCamPos ,3f);
+            yield return new WaitForSeconds(5f);
+            this.transform.parent.DOMove(Obj.transform.position + DefaultCamPOS,5f);
         }
     }
     protected void ForcustoBoss()

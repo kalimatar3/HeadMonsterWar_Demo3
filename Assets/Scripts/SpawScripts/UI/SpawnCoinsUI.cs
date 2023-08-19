@@ -30,14 +30,14 @@ public class SpawnCoinsUI : MyBehaviour
             return true;
         }); 
         int sum = 0;
-        while( sum < 5)
+        while( sum < 10)
         {
-            CurrentCoinTextNumber += CoinUISpawner.Instance.CurrentNumberofCoins/5;
+            CurrentCoinTextNumber += CoinUISpawner.Instance.CurrentNumberofCoins/10;
             sum ++;
             yield return new WaitForSeconds(0.2f);
         }
         sum = 0;
-        while( sum < 5)
+        while( sum < 10)
         {
             SoundSpawner.Instance.Spawn(CONSTSoundsName.PickCoin,this.transform.position,Quaternion.identity);
             Transform Coin =  CoinUISpawner.Instance.Spawn("Coin",this.CoinStart.position,Quaternion.identity);
@@ -46,7 +46,7 @@ public class SpawnCoinsUI : MyBehaviour
             thisCoinfly.StartPos = RandomPosAroundObj(CoinStart,new Vector2(1,2)); 
             thisCoinfly.EndPos = CoinEnd.position;
             sum ++;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
      protected Vector3 RandomPosAroundObj(Transform Obj,Vector2 Radius)

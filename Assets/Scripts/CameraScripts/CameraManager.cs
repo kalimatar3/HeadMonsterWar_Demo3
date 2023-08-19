@@ -6,6 +6,8 @@ public class CameraManager : MyBehaviour
 {
     protected static CameraManager instance;
     public static CameraManager Instance { get => instance;}
+    [SerializeField] protected CameraFollow cameraFollow;
+    public CameraFollow CameraFollow => cameraFollow;
     protected override void Awake()
     {
         base.Awake();
@@ -16,5 +18,13 @@ public class CameraManager : MyBehaviour
         }
         else instance = this;
     }
-
+    protected void LoadCameraFollow()
+    {
+        this.cameraFollow = GetComponentInChildren<CameraFollow>();
+    }
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadCameraFollow();
+    }
 }

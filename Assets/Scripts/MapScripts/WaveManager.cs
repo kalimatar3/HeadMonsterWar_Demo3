@@ -12,9 +12,9 @@ public class WaveManager : MyBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.Loadlevels();
+        this.LoadWaves();
     }
-    protected void Loadlevels()
+    protected void LoadWaves()
     {
         if(ListWave.Count != 0 ) return;
         foreach(Transform wave in this.transform)
@@ -37,19 +37,19 @@ public class WaveManager : MyBehaviour
     }
     protected virtual void ChangeLvInEmty()
     {
-        foreach(Transform level in ListWave)
+        foreach(Transform Wave in ListWave)
         {
-            if(level.gameObject.activeInHierarchy)
+            if(Wave.gameObject.activeInHierarchy)
             {
-                LevelManager.Instance.CrLevelname = level.name;
-                SpawnEnemies spawnEnemies = level.GetComponent<SpawnEnemies>();
+                LevelManager.Instance.CrLevelname = Wave.name;
+                SpawnEnemies spawnEnemies = Wave.GetComponent<SpawnEnemies>();
                 if(spawnEnemies == null) return;
                 LevelManager.Instance.NumberofPreCE = spawnEnemies.NumberofPreEnemies;
                 LevelManager.Instance.NumberofAllCE = spawnEnemies.MaxNumberofEnemies;
                 LevelManager.Instance.NumberofAliveCE = spawnEnemies.NumberofAliveEnemies;
                 if(LevelManager.Instance.NumberofPreCE > 0) return;
-                if(level.GetComponent<SpawnEnemies>() == null) return;
-               foreach(Transform enemie in level.GetComponent<SpawnEnemies>().ListEnemies)
+                if(Wave.GetComponent<SpawnEnemies>() == null) return;
+               foreach(Transform enemie in Wave.GetComponent<SpawnEnemies>().ListEnemies)
                 if(enemie.gameObject.activeInHierarchy == true)  return;
             }
         }
@@ -64,6 +64,7 @@ public class WaveManager : MyBehaviour
             {
                 PanelCtrl.Instance.ShowPanel("Winpannel");
                 LevelManager.Instance.NextLevel();
+                this.transform.parent.gameObject.SetActive(false);
             }
         }
     }

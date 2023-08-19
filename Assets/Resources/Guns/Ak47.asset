@@ -38,7 +38,7 @@ MonoBehaviour:
     Firerate: 0.1
     Reloadtime: 1
     Dame: 30
-    Range: 0
+    Range: 50
   - MaxAmmo: 33
     Firerate: 0.1
     Reloadtime: 1

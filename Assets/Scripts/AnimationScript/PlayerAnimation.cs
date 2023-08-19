@@ -24,6 +24,12 @@ public class PlayerAnimation : MyBehaviour
         this.Attack();
         this.IsDead();
         this.Reloading();
+        this.FistCamScense();
+    }
+    protected void FistCamScense()
+    {
+        PlayerTopAnimator.SetBool(StringConts.FistCamScense,DataManager.Instance.FistCamMove);
+        PlayerUnderAnimator.SetBool(StringConts.FistCamScense,DataManager.Instance.FistCamMove);  
     }
     protected void Reloading()
     {

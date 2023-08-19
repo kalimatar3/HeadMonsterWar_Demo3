@@ -7,7 +7,7 @@ public class GunUIManager : MyBehaviour
 {
     [SerializeField] protected List<RectTransform> ListGuns;
     [SerializeField] protected List<float> ListGunxPos;
-    [SerializeField] protected int Index;
+    [SerializeField] public int Index;
     [SerializeField] protected RectTransform Holder;
     [SerializeField] protected RectTransform Status;
     [SerializeField] protected float ChangepageTime;

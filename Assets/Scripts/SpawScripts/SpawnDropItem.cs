@@ -29,7 +29,8 @@ public class SpawnDropItem : MyBehaviour
     {
         Element = Rand.Main(CurrentListDropRate);
         if(Element[0] <= 0) return;
-        BuffSpawner.Instance.Spawn(BuffSpawner.Instance.Buffname[(int)Element[0]],this.transform.parent.position,Quaternion.identity);
+        Transform Item = BuffSpawner.Instance.Spawn(BuffSpawner.Instance.Buffname[(int)Element[0]],this.transform.parent.position,Quaternion.identity);
+        Item.GetComponentInChildren<BuffDespawn>().DespawnTime = 20f;
         BuffManager.Instance.IncreaseCurrentNumberofBuff(BuffSpawner.Instance.Buffname[(int)Element[0]]);
     }
     protected void DropRateChance()

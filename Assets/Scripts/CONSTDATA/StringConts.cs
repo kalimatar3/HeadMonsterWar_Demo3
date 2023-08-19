@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public static class StringConts 
@@ -14,4 +15,5 @@ public static class StringConts
     public static string BossSpiderAnim = "BossSpiderState";
     public static string PlayerFacingAnim = "Facing";
     public static string PlayerReload = "Reload";
+    public static string FistCamScense = "FistCamScense";
 }
