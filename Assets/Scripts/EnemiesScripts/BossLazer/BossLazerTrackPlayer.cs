@@ -22,7 +22,7 @@ public class BossLazerTrackPlayer : BosstTrackPlayer
             {
                 followObj  targetfollow = TarGet.GetComponentInChildren<followObj>();
                 targetfollow.smooth = 0f;
-                this.transform.parent.forward = Vector3.Lerp(this.transform.parent.forward,Direction,Time.deltaTime * 1f *  1.5f);
+                this.transform.parent.forward = Vector3.Lerp(this.transform.parent.forward,Direction,Time.deltaTime * 1f);
             }
             else
             {

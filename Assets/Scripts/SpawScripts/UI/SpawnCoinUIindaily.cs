@@ -7,11 +7,8 @@ public class SpawnCoinUIindaily : SpawnCoinsUI
 {
     protected override void OnEnable()
     {
-    }
-    public void ClickClaim()
-    {
         this.StartCoroutine(this.spawncoinsDelay());
-    }    
+    }
     public override IEnumerator spawncoinsDelay()
     {
         this.CurrentCoinTextNumber = 0;
@@ -32,6 +29,7 @@ public class SpawnCoinUIindaily : SpawnCoinsUI
             sum ++;
             yield return new WaitForSeconds(0.2f);
         }
+        this.transform.parent.gameObject.SetActive(false);
     }
     protected override void  ShowCoinText()
     {

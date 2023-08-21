@@ -9,6 +9,7 @@ public class DameReciver : MyBehaviour
     {
         CurrentHp -= dame;
         if(CurrentHp <= 0) CurrentHp = 0;
+        this.StartCoroutine(Dead());
     }
     public virtual void RestoreHp(float dame)
     {
@@ -23,15 +24,20 @@ public class DameReciver : MyBehaviour
     {
         this.ReBorn();
     }
-    protected virtual void Dead()
+    // protected virtual void Dead()
+    // {
+    //     if(!Candead()) return;
+    //     else StartCoroutine(DelayDeath());
+    // }
+    protected virtual IEnumerator Dead()
     {
-        if(!Candead()) return;
-        else StartCoroutine(DelayDeath());
-    }
-    protected IEnumerator DelayDeath()
-    {
+        yield return new WaitUntil(predicate:()=>
+        {
+            return Candead();
+        });
         yield return new WaitForSeconds(0.5f);
         this.Dying();
+
     }
     protected virtual void Dying()
     {

@@ -22,7 +22,7 @@ public class WinScript : MyBehaviour
         for(int i = 0 ; i < ListObjDelayAppear.Count ; i++)
         {
             ListObjDelayAppear[i].gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(2f);
         }
     }
 

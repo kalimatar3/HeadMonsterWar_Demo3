@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class WaveManager : MyBehaviour
@@ -7,6 +9,7 @@ public class WaveManager : MyBehaviour
     [SerializeField] protected List<Transform> ListWave;
     [SerializeField] protected int CurrentWave;
     [SerializeField] protected float preparetime;
+    protected string cache;
     public float CoinLevelReward;
     protected float timer;
     protected override void LoadComponents()
@@ -24,7 +27,7 @@ public class WaveManager : MyBehaviour
     }
     protected void OnEnable()
     {
-        this.StartCoroutine(this.DelayLoadRewardCoin());
+        this.StartCoroutine(this.DelayLoadRewardCoin());        
     }
     protected IEnumerator DelayLoadRewardCoin()
     {
@@ -72,5 +75,4 @@ public class WaveManager : MyBehaviour
     {
         this.ChangeLvInEmty();
     }
-
 }

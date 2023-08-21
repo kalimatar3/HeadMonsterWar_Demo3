@@ -14,6 +14,7 @@ public class SpawnEnemies : MyBehaviour
     public float NumberofPreEnemies,NumberofAliveEnemies;
     public int MaxNumberofEnemies;
     protected Vector3 ThisPos;
+    protected bool Gate;
     protected override void Start()
     {
         base.Start();
@@ -25,6 +26,13 @@ public class SpawnEnemies : MyBehaviour
         {
             MaxNumberofEnemies += NUmberOfEachBoss[i];
         }
+    }
+    protected void OnEnable()
+    {
+        Gate = false;
+        LevelManager.Instance.WaveTag.gameObject.SetActive(true);
+        LevelManager.Instance.Leveltag.gameObject.SetActive(true);
+        StartCoroutine( LevelManager.Instance.WaveTag.GetComponent<waveTagPerform>().StartWavePerform(this.transform.name));
     }
     protected override void LoadComponents()
     {
@@ -124,5 +132,11 @@ public class SpawnEnemies : MyBehaviour
             if(ListEnemies[i].gameObject.activeInHierarchy) cache2 ++;
         }
         this.NumberofAliveEnemies = cache2;
+        if(NumberofAliveEnemies + NumberofPreEnemies <= 0 && Gate == false)  
+        {
+            Gate = true;
+            LevelManager.Instance.WaveTag.gameObject.SetActive(true);
+            StartCoroutine( LevelManager.Instance.WaveTag.GetComponent<waveTagPerform>().ENdWavePerform(this.transform.gameObject.name));
+        }
     }
 }

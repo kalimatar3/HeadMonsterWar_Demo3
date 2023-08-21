@@ -7,7 +7,7 @@ public class PlayerReciver : DameReciver
     public PlayerController playerController;
     [SerializeField] protected float InvulnerableNumber;
     public float CurinvulnerableNumber;
-    [SerializeField] protected bool CanRevise;
+    [SerializeField] public bool CanRevise;
     [SerializeField] protected float timer,delaytime;
     protected bool PanelGate,CanTakeDame;
     protected override void LoadComponents()
@@ -31,25 +31,18 @@ public class PlayerReciver : DameReciver
     {
         CanRevise = false;
     }
-    protected override void Dead()
+    protected override void Dying()
     {
         if( this.CurrentHp <= 0)
         {
-            if(CanRevise)
-            {
+            HolderManager.Instance.DeActiveHolder("SoundHolder");
+            PanelCtrl.Instance.ShowPanel("GameOverPanel");
+            PanelCtrl.Instance.HirePanel("GameplayPanel");
                 if(!PanelGate)
                 {
                     PanelGate = true;
-                    HolderManager.Instance.DeActiveHolder("SoundHolder");
-                    PanelCtrl.Instance.ShowPanel("RevivePannel");
-                    PanelCtrl.Instance.HirePanel("GameplayPanel");
                 }
-            }
-            if(!CanRevise)
-            {
-                PanelCtrl.Instance.ShowPanel("GameOverPanel");
-            }
-        } 
+        }   
     }
     public override void ReBorn()
     {

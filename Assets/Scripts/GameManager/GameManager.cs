@@ -1,10 +1,7 @@
-        using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
-using System.ComponentModel.Design.Serialization;
-
 public class GameManager : MyBehaviour
 {
     protected static GameManager instance;
@@ -18,22 +15,20 @@ public class GameManager : MyBehaviour
     }
     protected IEnumerator TimeCounting()
     {
-        foreach(Transform panel in PanelCtrl.Instance.ListPanels)
+        yield return new WaitUntil(predicate:() =>
         {
-          if(panel.name == "MainMenuPannel") 
-          {
-            while(panel.gameObject.activeInHierarchy)
+            if(!DataManager.Instance.GamePlayMode) return false;
+            if(!PanelCtrl.Instance.transform.GetChild(0).gameObject.activeInHierarchy) return false;
+            else
             {
-                yield return new WaitForSeconds(0.1f);
                 ButtonManager.Instance.DailyRewardButton.gameObject.SetActive(DataManager.Instance.CanshowDailyReward);
                 timepassed = DateTime.Now - DateTime.Parse(DataManager.Instance.LastTime);
-                if(timepassed.TotalHours >= 24f)
-                {
-                    DataManager.Instance.CanshowDailyReward = true;
-                }
+                if(timepassed.TotalHours < 24f) return false;
+                else return true;
             }
-          }
-        }
+        });
+        DataManager.Instance.LastTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        PanelCtrl.Instance.ShowPanel("DailyRewardpannel");
     }
     protected IEnumerator GameModeDelay()
     {
@@ -46,7 +41,7 @@ public class GameManager : MyBehaviour
     }
     protected void GameMode()
     {
-        if(DataManager.Instance.TutorialLevel >= 2) DataManager.Instance.GamePlayMode = true;
+        if(DataManager.Instance.TutorialLevel > 2) DataManager.Instance.GamePlayMode = true;
         if(DataManager.Instance.GamePlayMode)
         {
             TutorialUI.Instance.ActiveAll();

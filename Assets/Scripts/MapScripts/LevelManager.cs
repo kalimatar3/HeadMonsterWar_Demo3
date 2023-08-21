@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LevelManager : MyBehaviour
 {
+    [SerializeField] public Transform WaveTag;
+    [SerializeField] public Transform Leveltag;
     public List<Transform> ListLevels;
     public float NumberofAllCE,NumberofPreCE,NumberofAliveCE;
     public string CrLevelname;

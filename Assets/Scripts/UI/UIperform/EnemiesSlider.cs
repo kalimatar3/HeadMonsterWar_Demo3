@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +13,7 @@ public class EnemiesSlider : BaseSlider
     }
     protected void LoadText()
     {
-        thisText =GetComponentInChildren<Text>();
+        thisText = GetComponentInChildren<Text>();
     }
     protected void  ShowText()
     {

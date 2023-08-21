@@ -10,6 +10,11 @@ public class FloatingJoystick : Joystick
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
     }
+    protected void OnDisable()
+    {
+        input = Vector2.zero;
+        handle.anchoredPosition = Vector2.zero;
+    }
     protected override void Start()
     {
         base.Start();

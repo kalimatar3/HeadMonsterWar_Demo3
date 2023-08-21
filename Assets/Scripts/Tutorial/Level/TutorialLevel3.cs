@@ -19,6 +19,7 @@ public class TutorialLevel3 : TutorialLevel
         });
         PanelCtrl.Instance.ShowPanel("MainMenuPannel");
         PanelCtrl.Instance.HirePanel("GameplayPanel");
+        TutorialUI.Instance.ActiveButton(4);
         yield return new WaitForSeconds(2f);
         TutorialUI.Instance.ActivePanel(3);
         GameManager.Instance.PauseGame();
@@ -46,5 +47,6 @@ public class TutorialLevel3 : TutorialLevel
         });
         TutorialUI.Instance.DeActivePanel();
         GameManager.Instance.ResumeGame();
+        DataManager.Instance.TutorialLevel = 3;
     }   
 }
