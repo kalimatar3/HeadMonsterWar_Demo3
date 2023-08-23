@@ -26,9 +26,9 @@ public class ScenesManager : MyBehaviour
     }
     protected override void Start()
     {
+        ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);        
         base.Start();
-        ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
-    } 
+    }
     public async void LoadScene(string SceneName)
     {
        var Scene = SceneManager.LoadSceneAsync(SceneName);

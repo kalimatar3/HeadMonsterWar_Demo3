@@ -12,6 +12,7 @@ public class TutorialLevel2 : TutorialLevel
     [SerializeField] Transform FistEnemyBar;
     [SerializeField] Transform FistBuff;
     [SerializeField] protected Transform FistBoss;
+    [SerializeField] protected Transform HpbarHolder;
     protected void OnEnable()
     {
         this.StartCoroutine(this.Flow());
@@ -30,6 +31,7 @@ public class TutorialLevel2 : TutorialLevel
         FakeObj =  new GameObject();
         FakeObj.transform.position =  new Vector3(-5,0,-23.5f);
         TutorialUI.Instance.ActivePanel(6);
+        yield return new WaitForSeconds(2f);
         GameManager.Instance.PauseGame();
         yield return new  WaitUntil(predicate:()=>
         {
@@ -40,14 +42,11 @@ public class TutorialLevel2 : TutorialLevel
         TutorialUI.Instance.DeActivePanel();
         TutorialUI.Instance.DeActiveTutorialPoint();
         yield return new WaitForSeconds(1f);
-        TutorialUI.Instance.ActivePanel(7);
         TutorialUI.Instance.ActiveButton(3);
-        GameManager.Instance.PauseGame();
         yield return new  WaitUntil(predicate:()=>
         {
             return GamePlayPanel.gameObject.activeInHierarchy;
         });
-        GameManager.Instance.ResumeGame();
         TutorialUI.Instance.DeActivePanel();    
         yield return new  WaitUntil(predicate:()=>
         {
@@ -63,6 +62,7 @@ public class TutorialLevel2 : TutorialLevel
         });
         this.FistEnemy.gameObject.SetActive(true);
         this.FistEnemyBar.gameObject.SetActive(true);
+        this.HpbarHolder.gameObject.SetActive(true);
         yield return new  WaitUntil(predicate:()=>
         {
             return !FistEnemy.gameObject.activeInHierarchy;
@@ -91,6 +91,7 @@ public class TutorialLevel2 : TutorialLevel
             return FistBoss.gameObject.activeInHierarchy;
         });
         yield return new WaitForSeconds(4f);
+        TutorialUI.Instance.ActiveButton(4);
         TutorialUI.Instance.ActivePanel(2);
         GameManager.Instance.PauseGame();
         yield return new  WaitUntil(predicate:()=>

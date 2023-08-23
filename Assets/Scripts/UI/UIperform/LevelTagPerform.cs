@@ -17,5 +17,9 @@ public class LevelTagPerform : MyBehaviour
             return true;
         });
         this.transform.DOScaleY(1,0.2f);
+    }
+    protected void OnDisable()
+    {
+        this.transform.localScale = new Vector3(1,0,1);
     }    
 }

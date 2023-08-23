@@ -21,6 +21,7 @@ public class TutorialLevel1 : TutorialLevel
             if(TutorialUI.Instance == null) return false;
             return true;
         });
+        PanelCtrl.Instance.HirePanel("CoinPanel");
         yield return new  WaitUntil(predicate:()=>
         {
            if(CameraManager.Instance.transform.position != PlayerController.Instance.transform.position + CameraManager.Instance.CameraFollow.DefaultCamPOS) return false;
@@ -48,7 +49,7 @@ public class TutorialLevel1 : TutorialLevel
         Hpheal.GetComponentInChildren<BuffDespawn>().DespawnTime = 1000000000000000f;
         TutorialUI.Instance.ActiveTutorialPoint();
         TutorialUI.Instance.SetCollorTutorialPoint(Hpheal,Color.yellow);
-        TutorialUI.Instance.SetMassage("Pick it UP",Color.white);
+        TutorialUI.Instance.SetMassage("Pick it up",Color.white);
         
         yield return new WaitUntil(predicate:()=>
         {

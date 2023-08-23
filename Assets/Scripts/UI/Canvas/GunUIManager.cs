@@ -13,6 +13,7 @@ public class GunUIManager : MyBehaviour
     [SerializeField] protected float ChangepageTime;
     [SerializeField] protected List<Slider> ListStatusSlider; 
     [SerializeField] protected float BaseHolderPosX;
+    protected float CurrentVelocity0 = 0f,CurrentVelocity1 = 0f,CurrentVelocity2 = 0f;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -38,7 +39,7 @@ public class GunUIManager : MyBehaviour
         {
             ListGuns.Add(element);
             ListGunxPos.Add(basePOs);
-            basePOs -= 1830;
+            basePOs -= 1800;
         }
     }
     protected override void Start()
@@ -112,12 +113,24 @@ public class GunUIManager : MyBehaviour
             }
             ButtonManager.Instance.Currentbutton = ListGuns[Index];
        }
-       this.SliderStatus();
+       //this.SliderStatus();
     }
     protected void SliderStatus()
     {
-        ListStatusSlider[0].value = GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Dame/100;
-        ListStatusSlider[1].value = GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Range/100;
-        ListStatusSlider[2].value = GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Firerate;
+        float number0 =  GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Dame/100;
+        float Currentvalue0 = Mathf.SmoothDamp(ListStatusSlider[0].value,number0,ref CurrentVelocity0,Time.deltaTime * 1f);
+        ListStatusSlider[0].value = Currentvalue0;
+
+        float number1 =  GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Range/100;
+        float Currentvalue1 = Mathf.SmoothDamp(ListStatusSlider[1].value,number1,ref CurrentVelocity1, Time.deltaTime * 1f);
+        ListStatusSlider[1].value = Currentvalue1;
+
+        float number2 =  GunCtrl.Instance.ListGunSO[Index].GunUpgrade[DataManager.Instance.GetUpgradenumberfromUGAD(GunCtrl.Instance.ListGunSO[Index].ToString())].Firerate;
+        float Currentvalue2 = Mathf.SmoothDamp(ListStatusSlider[2].value,number2,ref CurrentVelocity2,Time.deltaTime * 1f);
+        ListStatusSlider[2].value = Currentvalue2;
+    }
+    protected void FixedUpdate()
+    {
+        this.SliderStatus();
     }
 }

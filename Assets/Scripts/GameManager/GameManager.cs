@@ -37,7 +37,17 @@ public class GameManager : MyBehaviour
             if(DataManager.Instance == null) return false;
             return true;
         });
+        StartCoroutine(SetGameMode());
         this.GameMode();
+    }
+    protected IEnumerator SetGameMode()
+    {
+        yield return new WaitUntil(predicate:()=>
+        {
+            if(DataManager.Instance.TutorialLevel <= 2) return false;
+            return true;
+        }); 
+        DataManager.Instance.GamePlayMode = true;
     }
     protected void GameMode()
     {
@@ -47,6 +57,7 @@ public class GameManager : MyBehaviour
             TutorialUI.Instance.ActiveAll();
             PanelCtrl.Instance.HirePanel("TutorialPanel");
             PanelCtrl.Instance.ShowPanel("MainMenuPannel");
+            PanelCtrl.Instance.ShowPanel("CoinPanel");
         }
     }
     public void Replay()

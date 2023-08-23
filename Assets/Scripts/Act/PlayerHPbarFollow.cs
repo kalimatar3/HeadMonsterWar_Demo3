@@ -10,5 +10,4 @@ public class PlayerHPbarFollow : ForwardCamera
         Vector3 Dir = new Vector3(0,Direction.y,Direction.z);
         this.transform.parent.forward = -Dir;
     }
-
 }

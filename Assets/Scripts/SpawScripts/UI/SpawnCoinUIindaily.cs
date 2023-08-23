@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class SpawnCoinUIindaily : SpawnCoinsUI
 {
-    protected override void OnEnable()
+    public void ClaimReward()
     {
         this.StartCoroutine(this.spawncoinsDelay());
+    }
+    protected override void OnEnable()
+    {
+        this.ShowCoinText();
     }
     public override IEnumerator spawncoinsDelay()
     {

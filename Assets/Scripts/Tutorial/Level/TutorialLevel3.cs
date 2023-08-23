@@ -17,17 +17,15 @@ public class TutorialLevel3 : TutorialLevel
             if(TutorialUI.Instance == null) return false;
             return true;
         });
+        TutorialUI.Instance.ActiveButton(5);
         PanelCtrl.Instance.ShowPanel("MainMenuPannel");
         PanelCtrl.Instance.HirePanel("GameplayPanel");
-        TutorialUI.Instance.ActiveButton(4);
         yield return new WaitForSeconds(2f);
         TutorialUI.Instance.ActivePanel(3);
-        GameManager.Instance.PauseGame();
         yield return new WaitUntil(predicate:()=>
         {
             return ShopGunPannel.gameObject.activeInHierarchy;
         });
-        GameManager.Instance.ResumeGame();
         TutorialUI.Instance.DeActivePanel();
         yield return new WaitForSeconds(1f);
         TutorialUI.Instance.ActivePanel(4);
@@ -39,14 +37,15 @@ public class TutorialLevel3 : TutorialLevel
         TutorialUI.Instance.DeActivePanel();
         TutorialUI.Instance.ActivePanel(5);
         yield return new WaitForSeconds(2f);
-        GameManager.Instance.PauseGame();
         yield return new WaitUntil(predicate:()=>
         {
            if(DataManager.Instance.CurrentGunName != "Shotgun") return false;
            return true; 
         });
         TutorialUI.Instance.DeActivePanel();
-        GameManager.Instance.ResumeGame();
+        TutorialUI.Instance.ActiveButton(3);
+        PanelCtrl.Instance.HirePanel("ShopGunpanel");
+        PanelCtrl.Instance.ShowPanel("MainMenuPannel");
         DataManager.Instance.TutorialLevel = 3;
     }   
 }

@@ -30,11 +30,11 @@ public class SpawnCoinsUI : MyBehaviour
             return true;
         }); 
         int sum = 0;
-        while( sum < 10)
+        while( sum < CoinUISpawner.Instance.CurrentNumberofCoins)
         {
-            CurrentCoinTextNumber += CoinUISpawner.Instance.CurrentNumberofCoins/10;
+            CurrentCoinTextNumber ++;
             sum ++;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(2f/CoinUISpawner.Instance.CurrentNumberofCoins);
         }
         sum = 0;
         while( sum < 10)

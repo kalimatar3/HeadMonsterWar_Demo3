@@ -5,6 +5,7 @@ using UnityEngine;
 public class PanelCtrl : MyBehaviour
 {
     protected static PanelCtrl instance;
+    [SerializeField] protected Transform HpbarHoler;
     public static PanelCtrl Instance { get => instance ;}
     public List<Transform> ListPanels;
     protected override void LoadComponents()
@@ -19,6 +20,10 @@ public class PanelCtrl : MyBehaviour
         {
             this.ListPanels.Add(panel);
         }
+    }
+    protected void FixedUpdate()
+    {
+        if(DataManager.Instance.GamePlayMode) HpbarHoler.gameObject.SetActive(!this.transform.GetChild(0).gameObject.activeInHierarchy);
     }
     protected override void Awake()
     {

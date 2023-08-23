@@ -3,7 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 public class CameraFollow : followObj
 {
-    [SerializeField] public Vector3 DefaultCamPOS,FireCamPOS,CutSceneCamPos;
+    [SerializeField] public Vector3 DefaultCamPOS,MoveCamPos,FireCamPOS,CutSceneCamPos;
     [SerializeField] protected Quaternion DefaultCamROS;
     protected override void Start()
     {
@@ -17,12 +17,17 @@ public class CameraFollow : followObj
         if(Obj == null) return;
         if(Obj == PlayerController.Instance.transform)
         {
-            Vector3 newPos = Vector3.Lerp(this.transform.parent.position, Obj.transform.position + DefaultCamPOS , this.smooth * Time.deltaTime);
-            this.transform.parent.position = newPos;
+                Vector3 thisPos = Vector3.Lerp(this.transform.parent.position, Obj.transform.position + DefaultCamPOS , this.smooth * Time.deltaTime);
+                this.transform.parent.position = thisPos;
             if(InputManager.Instance.Shootingstick.Horizontal !=0 ||InputManager.Instance.Shootingstick.Vertical != 0)
             {
                 Vector3 NewPOs =  Vector3.Lerp(this.transform.parent.position, Obj.transform.position + FireCamPOS,smooth /2 * Time.deltaTime);
                 this.transform.parent.position = NewPOs;
+            }
+            if(InputManager.Instance.MovingJoystick.Horizontal !=0 ||InputManager.Instance.MovingJoystick.Vertical != 0)
+            {
+                Vector3 newPos = Vector3.Lerp(this.transform.parent.position, Obj.transform.position + MoveCamPos , this.smooth * Time.deltaTime);
+                this.transform.parent.position = newPos;
             }
         }
         else

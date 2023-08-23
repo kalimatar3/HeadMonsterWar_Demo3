@@ -335,7 +335,16 @@ public class DataManager : MyBehaviour
     {
          if(!CanPayGold(GetCost(CurrentGunName))) return;
         this.DcrGold(GetCost(CurrentGunName));
-        this.UpgradefromUGAD(CurrentGunName);
+        foreach(UpgradeableData element in ListUpGradeAbleData)
+        {
+            if(element.ListUpdate.Count > 1)
+            {
+                foreach(UpgradeableData.element ele in element.ListUpdate)
+                {
+                    this.UpgradefromUGAD(ele.Name);
+                }
+            }
+        }
         Lsmanager.Instance.SaveGame();    
     }
     public virtual void PlayerDataFromJson(string JsonString)
