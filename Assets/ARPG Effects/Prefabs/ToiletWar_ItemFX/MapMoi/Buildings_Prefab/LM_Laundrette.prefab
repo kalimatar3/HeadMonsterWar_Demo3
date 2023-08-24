@@ -560,6 +560,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7046194324900764398}
+  - component: {fileID: 6259497145889980096}
+  - component: {fileID: 7033685034765299519}
+  - component: {fileID: 4632002227655633483}
+  - component: {fileID: 1619375887237004141}
+  - component: {fileID: 2682686667107245713}
   m_Layer: 0
   m_Name: LM_Laundrette
   m_TagString: Untagged
@@ -599,6 +604,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &6259497145889980096
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002960272328426132}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &7033685034765299519
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002960272328426132}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1219615, y: 0.052884758, z: 0.116980925}
+  m_Center: {x: 0.024502877, y: -0.017440498, z: -0.026567936}
+--- !u!114 &4632002227655633483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002960272328426132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
+--- !u!114 &1619375887237004141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002960272328426132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dealnumber: 0
+  ExplosionHitName: 
+  CanThroughObj: 0
+--- !u!114 &2682686667107245713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002960272328426132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5194b60bfcc85f4e9d5d57fd242fcac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHp: 100000000
+  CurrentHp: 0
 --- !u!1 &2027697620745753203
 GameObject:
   m_ObjectHideFlags: 0

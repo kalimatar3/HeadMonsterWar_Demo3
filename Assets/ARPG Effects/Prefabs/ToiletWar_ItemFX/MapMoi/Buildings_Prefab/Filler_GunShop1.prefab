@@ -6436,6 +6436,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7780213470043181668}
+  - component: {fileID: 2811396749587760949}
+  - component: {fileID: 39565494152271347}
+  - component: {fileID: 9223137902420078507}
+  - component: {fileID: 3484913091580038795}
+  - component: {fileID: 3935430057757104198}
   m_Layer: 0
   m_Name: Filler_GunShop1
   m_TagString: Untagged
@@ -6459,3 +6464,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2811396749587760949
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780213470043181667}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35278964, y: 0.118485495, z: 0.18493342}
+  m_Center: {x: -0.0006832704, y: -0.0295932, z: -0.00939028}
+--- !u!114 &39565494152271347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780213470043181667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
+--- !u!54 &9223137902420078507
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780213470043181667}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &3484913091580038795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780213470043181667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dealnumber: 0
+  ExplosionHitName: 
+  CanThroughObj: 0
+--- !u!114 &3935430057757104198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780213470043181667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13c2ee9ab3a12e408c117144b7c9e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHp: 100000000
+  CurrentHp: 0
+  Camblock: 0

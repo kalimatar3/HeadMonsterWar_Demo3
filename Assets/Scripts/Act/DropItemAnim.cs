@@ -16,7 +16,7 @@ public class DropItemAnim : MyBehaviour
         .SetLoops(-1,LoopType.Restart)
         .SetRelative()
         .SetEase(Ease.Linear);
-        this.transform.DOLocalMoveY(BaseloPos.y + 0.05f,2f)            
+        this.transform.DOLocalMoveY(0.1f,2f)            
         .SetLoops(-1,LoopType.Yoyo)
         .SetRelative()
         .SetEase(Ease.Linear);

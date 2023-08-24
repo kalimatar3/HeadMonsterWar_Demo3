@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class TutorialLevel2 : TutorialLevel
@@ -10,7 +8,8 @@ public class TutorialLevel2 : TutorialLevel
     [SerializeField] Transform GamePlayPanel;
     [SerializeField] Transform FistEnemy;
     [SerializeField] Transform FistEnemyBar;
-    [SerializeField] Transform FistBuff;
+    [SerializeField] Transform BuffHolder;
+    protected Transform FistBuff;
     [SerializeField] protected Transform FistBoss;
     [SerializeField] protected Transform HpbarHolder;
     protected void OnEnable()
@@ -31,14 +30,11 @@ public class TutorialLevel2 : TutorialLevel
         FakeObj =  new GameObject();
         FakeObj.transform.position =  new Vector3(-5,0,-23.5f);
         TutorialUI.Instance.ActivePanel(6);
-        yield return new WaitForSeconds(2f);
-        GameManager.Instance.PauseGame();
         yield return new  WaitUntil(predicate:()=>
         {
             if(PlayerController.Instance.PlayerReciver.MaxHp <= 100) return false;
             return true; 
         });
-        GameManager.Instance.ResumeGame();
         TutorialUI.Instance.DeActivePanel();
         TutorialUI.Instance.DeActiveTutorialPoint();
         yield return new WaitForSeconds(1f);
@@ -67,8 +63,11 @@ public class TutorialLevel2 : TutorialLevel
         {
             return !FistEnemy.gameObject.activeInHierarchy;
         });
-        FistBuff.position = FistEnemy.transform.position;
-        FistBuff.gameObject.SetActive(true);
+        yield return new  WaitUntil(predicate:()=>
+        {
+            return BuffHolder.GetChild(0).gameObject.activeInHierarchy;
+        });
+        this.FistBuff = BuffHolder.GetChild(0);
         TutorialUI.Instance.ActiveTutorialPoint();
         TutorialUI.Instance.SetCollorTutorialPoint(FistBuff,Color.yellow);
         TutorialUI.Instance.SetMassage("Power Up Item",Color.white);

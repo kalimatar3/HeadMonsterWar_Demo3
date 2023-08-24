@@ -45,7 +45,7 @@ public class TutorialLevel1 : TutorialLevel
         GameManager.Instance.ResumeGame();
         TutorialUI.Instance.DeActivePanel();
         yield return new WaitForSeconds(1f);
-        Transform Hpheal = BuffSpawner.Instance.Spawn("HPheal",new Vector3(35,0,-35),Quaternion.identity);
+        Transform Hpheal = BuffSpawner.Instance.Spawn("HPheal",new Vector3(-25,0,20),Quaternion.identity);
         Hpheal.GetComponentInChildren<BuffDespawn>().DespawnTime = 1000000000000000f;
         TutorialUI.Instance.ActiveTutorialPoint();
         TutorialUI.Instance.SetCollorTutorialPoint(Hpheal,Color.yellow);

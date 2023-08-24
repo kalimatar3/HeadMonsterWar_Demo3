@@ -34,7 +34,7 @@ public class SpawnCoinsUI : MyBehaviour
         {
             CurrentCoinTextNumber ++;
             sum ++;
-            yield return new WaitForSeconds(2f/CoinUISpawner.Instance.CurrentNumberofCoins);
+            yield return new WaitForSeconds(1f/CoinUISpawner.Instance.CurrentNumberofCoins);
         }
         sum = 0;
         while( sum < 10)
