@@ -13,6 +13,11 @@ public class UIShopCost : UIperform
             if(ButtonManager.Instance.Currentbutton.name == element.Name)
             {
                 this.Text.text = element.Cost.ToString();
+                if(DataManager.Instance.Coin < element.Cost)
+                {
+                    this.Text.color =  Color.red;
+                }
+                else   this.Text.color =  Color.white;
             }
         }
     }

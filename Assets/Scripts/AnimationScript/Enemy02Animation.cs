@@ -20,7 +20,7 @@ public class Enemy02Animation : MyBehaviour
         if(enemieCtrl != null) return;
         enemieCtrl = GetComponentInParent<EnemieCtrl>();
     }
-    protected  void Update()
+    protected void FixedUpdate()
     {
         if(enemieCtrl.TrackPlayer.Tracking) State = RUN;
         else State = ATTACK;

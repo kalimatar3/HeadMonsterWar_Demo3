@@ -94,6 +94,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: Reload
     m_EventTreshold: 0.1
+  - m_ConditionMode: 4
+    m_ConditionEvent: PlayerMove
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7407644778261485485}
   m_Solo: 0
@@ -119,6 +122,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: PlayerFire
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: PlayerMove
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7407644778261485485}
   m_Solo: 0
@@ -484,31 +490,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PlayerFire
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PlayDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Reload
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: FistCamScense
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -539,7 +545,7 @@ AnimatorStateMachine:
     m_Position: {x: 740, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5111655035015152847}
-    m_Position: {x: 640, y: 280, z: 0}
+    m_Position: {x: 690, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7771420074202716936}
     m_Position: {x: 320, y: -20, z: 0}
@@ -601,9 +607,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 1.0219928
-  m_ExitTime: 0.9670482
+  m_TransitionDuration: 0.5
+  m_TransitionOffset: 0
+  m_ExitTime: 0.7410706
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

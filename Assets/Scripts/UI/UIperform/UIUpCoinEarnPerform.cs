@@ -7,6 +7,6 @@ public class UIUpCoinEarnPerform : UIperform
     protected override void PreformText()
     {
         base.PreformText();
-        Text.text = "Lv"  + DataManager.Instance.GetUpgradenumberfromUGAD("Coin").ToString();
+        Text.text = "Lv "  + DataManager.Instance.GetUpgradenumberfromUGAD("Coin").ToString();
     } 
 }

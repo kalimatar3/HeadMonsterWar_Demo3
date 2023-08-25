@@ -38,12 +38,6 @@ public class TutorialUI : MyBehaviour
         SpriteRenderer TutorialPointImage = Thisfollow.transform.GetComponentInChildren<SpriteRenderer>();
         TutorialPointImage.color = color;
     }
-    public void SetMassage(String Mes,Color color)
-    {
-        TextMeshPro TutorialPointText = TutorialPoint.GetComponentInChildren<TextMeshPro>();
-        TutorialPointText.text = Mes;
-        TutorialPointText.color = color;
-    }
     public void LoadListPanel()
     {
         if(ListPanels.Count > 0) return;

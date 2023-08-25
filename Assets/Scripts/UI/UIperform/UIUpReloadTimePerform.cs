@@ -7,6 +7,6 @@ public class UIUpReloadTimePerform : UIperform
     protected override void PreformText()
     {
         base.PreformText();
-        Text.text = "Lv"  + DataManager.Instance.GetUpgradenumberfromUGAD(DataManager.Instance.CurrentGunName).ToString();
+        Text.text = "Lv "  + DataManager.Instance.GetUpgradenumberfromUGAD(DataManager.Instance.CurrentGunName).ToString();
     } 
 }

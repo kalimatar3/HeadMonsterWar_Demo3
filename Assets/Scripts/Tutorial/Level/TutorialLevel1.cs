@@ -49,7 +49,6 @@ public class TutorialLevel1 : TutorialLevel
         Hpheal.GetComponentInChildren<BuffDespawn>().DespawnTime = 1000000000000000f;
         TutorialUI.Instance.ActiveTutorialPoint();
         TutorialUI.Instance.SetCollorTutorialPoint(Hpheal,Color.yellow);
-        TutorialUI.Instance.SetMassage("Pick it up",Color.white);
         
         yield return new WaitUntil(predicate:()=>
         {
@@ -61,7 +60,6 @@ public class TutorialLevel1 : TutorialLevel
         TutorialUI.Instance.ActivePanel(1);
         TutorialUI.Instance.ActiveButton(1);
         GameManager.Instance.PauseGame();
-
         yield return new WaitUntil(predicate:()=>
         {
             Vector3 move = new Vector3(InputManager.Instance.Shootingstick.Horizontal,0,InputManager.Instance.Shootingstick.Vertical);
@@ -70,10 +68,9 @@ public class TutorialLevel1 : TutorialLevel
         });
         GameManager.Instance.ResumeGame();
         TutorialUI.Instance.DeActivePanel();
-        Transform Enemy = EnemiesSpawner.Instance.Spawn("Enemie_01", PlayerController.Instance.transform.position + new Vector3(0,0,-20),Quaternion.identity);        
+        Transform Enemy = EnemiesSpawner.Instance.Spawn("Enemie_01", PlayerController.Instance.transform.position + new Vector3(20,0,0),Quaternion.identity);        
         TutorialUI.Instance.ActiveTutorialPoint();
         TutorialUI.Instance.SetCollorTutorialPoint(Enemy,Color.red);
-        TutorialUI.Instance.SetMassage("Shoot the Skibidi Toilet!",Color.white);
 
         yield return new WaitUntil(predicate:()=>
         {

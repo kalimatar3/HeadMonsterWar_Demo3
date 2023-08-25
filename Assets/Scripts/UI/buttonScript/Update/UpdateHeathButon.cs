@@ -9,7 +9,6 @@ public class UpdateHeathButon : UpdateButton
         if(DataManager.Instance.GetCost("Hp") > 0)
         {
             DataManager.Instance.IcrMaxHp();
-            EffectSpawner.Instance.Spawn(CONSTEffect.UpGradeHeathEffect,PlayerController.Instance.transform.position,Quaternion.identity);
         }
         base.Actbutton();
     }

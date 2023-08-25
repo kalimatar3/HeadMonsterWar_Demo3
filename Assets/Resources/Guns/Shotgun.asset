@@ -27,7 +27,7 @@ MonoBehaviour:
   - MaxAmmo: 2
     Firerate: 0.5
     Reloadtime: 1.5
-    Dame: 100
+    Dame: 70
     Range: 20
   - MaxAmmo: 2
     Firerate: 0.5
@@ -37,12 +37,12 @@ MonoBehaviour:
   - MaxAmmo: 2
     Firerate: 0.5
     Reloadtime: 1.5
-    Dame: 1
+    Dame: 100
     Range: 10
   - MaxAmmo: 2
     Firerate: 0.5
     Reloadtime: 1.5
-    Dame: 1
+    Dame: 100
     Range: 10
   - MaxAmmo: 2
     Firerate: 0.5

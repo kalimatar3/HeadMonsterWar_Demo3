@@ -7,7 +7,7 @@ public class DataManager : MyBehaviour
     [Serializable]
     public class Data
     {
-        public int Gold;
+        public int Coin;
         public string CurrentMap;
         public string CurrentModelName ;
         public string CurrentGunName;
@@ -50,7 +50,7 @@ public class DataManager : MyBehaviour
     protected static DataManager instance;
     public static DataManager Instance { get => instance;}
     [Header("SAVED DATA")]
-    public int Gold;
+    public int Coin;
     public string CurrentMap;
     public string CurrentModelName;
     public  string CurrentGunName;
@@ -191,7 +191,7 @@ public class DataManager : MyBehaviour
     }
     public virtual int GetGold()
     {
-        return this.Gold;
+        return this.Coin;
     }
     public string GetReferanceName(Transform obj)
     {
@@ -199,17 +199,17 @@ public class DataManager : MyBehaviour
     }
     public virtual void IcrGold(int number)
     {
-        this.Gold += number ;
+        this.Coin += number ;
        Lsmanager.Instance.SaveGame();
     }
     public virtual void DcrGold(int number)
     {
-        this.Gold -= number;
+        this.Coin -= number;
         Lsmanager.Instance.SaveGame();
     }
     protected virtual bool CanPayGold(int number)
     {
-        if(number > Gold) return false;
+        if(number > Coin) return false;
         return true;
     }
     public virtual void Unlock(Transform obj)
@@ -219,11 +219,11 @@ public class DataManager : MyBehaviour
         {
             if(element.Name == GetReferanceName(obj))
             {
-                if(!CanPayGold(element.Cost) || element.Cost  == 0)
+                if(!CanPayGold(element.Cost))
                 {
                     element.Available = false; 
                     return;
-                }                   
+                }
                 this.DcrGold(element.Cost);
                 ButtonManager.Instance.BuyButton.gameObject.SetActive(false);
                 element.Available = true ;
@@ -321,6 +321,7 @@ public class DataManager : MyBehaviour
         this.DcrGold(GetCost("Coin"));
         this.UpgradefromUGAD("Coin");
         this.UpgradefromDID("Coin");
+        EffectSpawner.Instance.Spawn(CONSTEffect.UpGradeCoinEffect,PlayerController.Instance.transform.position,Quaternion.identity);
         Lsmanager.Instance.SaveGame();
     }
 
@@ -329,12 +330,14 @@ public class DataManager : MyBehaviour
         if(!CanPayGold(GetCost("Hp"))) return;
         this.DcrGold(GetCost("Hp"));
         this.UpgradefromUGAD("Hp");
+        EffectSpawner.Instance.Spawn(CONSTEffect.UpGradeHeathEffect,PlayerController.Instance.transform.position,Quaternion.identity);
         Lsmanager.Instance.SaveGame();
     }
     public virtual void IcrMaxbullet()
     {
          if(!CanPayGold(GetCost(CurrentGunName))) return;
         this.DcrGold(GetCost(CurrentGunName));
+        EffectSpawner.Instance.Spawn(CONSTEffect.UpGradeAmmoEffect,PlayerController.Instance.transform.position,Quaternion.identity);
         foreach(UpgradeableData element in ListUpGradeAbleData)
         {
             if(element.ListUpdate.Count > 1)
@@ -351,7 +354,7 @@ public class DataManager : MyBehaviour
     {
        Data obj = JsonUtility.FromJson<Data>(JsonString);
        if(obj == null) return;
-        this.Gold = obj.Gold;
+        this.Coin = obj.Coin;
         this.CurrentMap = obj.CurrentMap;
         this.CurrentModelName = obj.CurrentModelName;
         this.CurrentGunName = obj.CurrentGunName;
@@ -371,7 +374,7 @@ public class DataManager : MyBehaviour
         this.CurrentModelName = "Model0";
         this.CurrentGunName = "Ak47";
         this.LastTime = "2023-08-09 15:30:45";
-        this.Gold = 99999;
+        this.Coin = 99999;
         this.ListUpGradeAbleData = null;
         this.ListDropItemData = null;
         this.ListShopData = null;

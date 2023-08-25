@@ -7,6 +7,6 @@ public class UIUpHeathPerform : UIperform
     protected override void PreformText()
     {
         base.PreformText();
-        Text.text = "Lv"  + DataManager.Instance.GetUpgradenumberfromUGAD("Hp").ToString();
+        Text.text = "Lv "  + DataManager.Instance.GetUpgradenumberfromUGAD("Hp").ToString();
     } 
 }

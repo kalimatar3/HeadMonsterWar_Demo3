@@ -19,7 +19,7 @@ public class UICoin : MyBehaviour
     }
     protected void showcoins()
     {
-        this.Gold.text = (DataManager.Instance.Gold.ToString());
+        this.Gold.text = (DataManager.Instance.Coin.ToString());
     }
     protected void FixedUpdate()
     {

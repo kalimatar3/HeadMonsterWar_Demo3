@@ -6,8 +6,8 @@ public class ModelUIManager : MyBehaviour
 {
     protected static ModelUIManager instance;
     public static ModelUIManager Instance { get => instance ;}
-    [SerializeField] public List<Transform> ListModels,ListGuns;
-    [SerializeField] protected RectTransform Models,Guns;
+    [SerializeField] public List<Transform> ListModels,ListGuns,ListButton;
+    [SerializeField] protected RectTransform Models,Guns,Button;
     protected override void Awake()
     {
         base.Awake();
@@ -31,6 +31,13 @@ public class ModelUIManager : MyBehaviour
             if(DataManager.Instance.CurrentModelName == null) return false;
             else return true;
         });
+        foreach(RectTransform element in ButtonManager.Instance.ListSelectButton)
+        {
+           if(element.name == DataManager.Instance.CurrentModelName)
+           {
+            ButtonManager.Instance.Currentbutton = element;
+           }
+        }
         this.ActiveModel(DataManager.Instance.CurrentModelName); 
         this.ActiveGun(DataManager.Instance.CurrentGunName);
     }
@@ -50,7 +57,14 @@ public class ModelUIManager : MyBehaviour
             ListGuns.Add(element);
         }
     }
-    
+    protected void LoadListButton()
+    {
+        if(ListButton.Count > 0 ) return;
+        foreach(Transform element in this.Button)
+        {
+            ListButton.Add(element);
+        }
+    } 
     public void ActiveModel(string Modelname)
     {
         foreach(Transform element in ListModels)

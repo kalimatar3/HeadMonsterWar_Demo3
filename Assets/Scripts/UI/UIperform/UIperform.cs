@@ -18,7 +18,7 @@ public class UIperform : MyBehaviour
     protected virtual void PreformText()
     {
     }
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         this.PreformText();
     }

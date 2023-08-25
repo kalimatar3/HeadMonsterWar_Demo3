@@ -9,7 +9,6 @@ public class UpdateCoinbutton : UpdateButton
         if(DataManager.Instance.GetCost("Coin") > 0)
         { 
             DataManager.Instance.IcrCoinEarn();
-            EffectSpawner.Instance.Spawn(CONSTEffect.UpGradeCoinEffect,PlayerController.Instance.transform.position,Quaternion.identity);
         }
         base.Actbutton();
     }

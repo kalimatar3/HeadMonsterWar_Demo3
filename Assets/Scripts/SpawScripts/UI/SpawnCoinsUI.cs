@@ -39,7 +39,6 @@ public class SpawnCoinsUI : MyBehaviour
         sum = 0;
         while( sum < 10)
         {
-            SoundSpawner.Instance.Spawn(CONSTSoundsName.PickCoin,this.transform.position,Quaternion.identity);
             Transform Coin =  CoinUISpawner.Instance.Spawn("Coin",this.CoinStart.position,Quaternion.identity);
             CoinFly thisCoinfly = Coin.GetComponentInChildren<CoinFly>();
             thisCoinfly.SpawnPos = this.CoinStart.position;

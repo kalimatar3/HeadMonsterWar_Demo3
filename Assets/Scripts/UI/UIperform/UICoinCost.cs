@@ -9,7 +9,10 @@ public class UICoinCost : UIperform
     {
         base.PreformText();
         if(DataManager.Instance.GetCost("Coin") <= 0)  mes = "MAX";
-        else mes = DataManager.Instance.GetCost("Coin").ToString();
+        else 
+        {
+            mes = DataManager.Instance.GetCost("Coin").ToString();
+        }
         Text.text = mes;
     }
 }

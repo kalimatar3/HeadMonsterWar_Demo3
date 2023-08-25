@@ -174,7 +174,6 @@ public class ButtonManager : MyBehaviour
                 return;
             }
         }
-        BuyButton.gameObject.SetActive(false); 
     }
     protected void SelectState()
     {
@@ -186,7 +185,6 @@ public class ButtonManager : MyBehaviour
                 return;
             }
         }
-        SelectButton.gameObject.SetActive(false);
     }
     protected void SlectedState()
     {        

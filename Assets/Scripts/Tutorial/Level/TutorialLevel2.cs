@@ -70,7 +70,6 @@ public class TutorialLevel2 : TutorialLevel
         this.FistBuff = BuffHolder.GetChild(0);
         TutorialUI.Instance.ActiveTutorialPoint();
         TutorialUI.Instance.SetCollorTutorialPoint(FistBuff,Color.yellow);
-        TutorialUI.Instance.SetMassage("Power Up Item",Color.white);
         yield return new  WaitUntil(predicate:()=>
         {
             return !FistBuff.gameObject.activeInHierarchy;
@@ -107,7 +106,6 @@ public class TutorialLevel2 : TutorialLevel
         });
         yield return new WaitForSeconds(3f);
         this.IsDone = true;
-        PanelCtrl.Instance.ShowPanel("CoinPanel");
     }   
 
 }

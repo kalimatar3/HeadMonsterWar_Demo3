@@ -95,7 +95,11 @@ public class SpawnEnemies : MyBehaviour
             timer = 0 ;
             int rdPos = Random.Range(0,MapManager.Instance.ListBossSapwnPos.Count);
             ThisPos = MapManager.Instance.ListBossSapwnPos[rdPos]; 
-            ListEnemies.Add(BossSpawner.Instance.Spawn(BossSpawner.Instance.ListBossesname[thisEnemie],ThisPos,Quaternion.identity));
+            Transform NewBoss  = BossSpawner.Instance.Spawn(BossSpawner.Instance.ListBossesname[thisEnemie],ThisPos,Quaternion.identity);
+            Transform Pointer = BossPointSpawner.Instance.Spawn(BossPointSpawner.BossPointEnum.BossPoint.ToString(),PlayerController.Instance.transform.position,Quaternion.identity);
+            Pointer.GetComponentInChildren<DespawnbyObj>().Obj = NewBoss;
+            Pointer.GetComponentInChildren<BossPoint>().Obj = NewBoss;
+            ListEnemies.Add(NewBoss);
             NUmberOfEachBoss[thisEnemie]--;
         }
         if(BossSpawner.Instance.ListEnemiesDefectSpawn.Count > 0 )
