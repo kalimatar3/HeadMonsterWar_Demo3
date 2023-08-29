@@ -37,7 +37,7 @@ public class ScenesManager : MyBehaviour
         do
         {
             LoadingSlider.value = Scene.progress;
-            await Task.Delay(200);
+            await Task.Delay(500);
         } while(!this.Canload());
        Scene.allowSceneActivation = true;
        LoadingScene.gameObject.SetActive(false);

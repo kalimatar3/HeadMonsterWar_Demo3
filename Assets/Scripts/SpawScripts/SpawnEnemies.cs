@@ -8,13 +8,15 @@ public class SpawnEnemies : MyBehaviour
     [SerializeField] protected List<int> NUmberOfEachBoss;
     [SerializeField] protected List<Vector2> DisAroundPlayer;
     [SerializeField] protected List<Vector2> TimeToSpawn;
-    public List<Transform> ListEnemies;
+    public List<Transform> ListEnemies,ListBosses;
+    [SerializeField] protected Transform CurrentBoss;
+    [SerializeField] int BossinWave;
     protected float timer;
-    protected int thisEnemie,thistime,EnemyInWave,BossinWave;
+    protected int thisEnemie,thistime;
     public float NumberofPreEnemies,NumberofAliveEnemies;
     public int MaxNumberofEnemies;
     protected Vector3 ThisPos;
-    protected bool Gate;
+    [SerializeField] protected bool tagGate,pointgate;
     protected override void Start()
     {
         base.Start();
@@ -25,19 +27,51 @@ public class SpawnEnemies : MyBehaviour
         for(int i = 0 ; i < NUmberOfEachBoss.Count ;i++)
         {
             MaxNumberofEnemies += NUmberOfEachBoss[i];
+            BossinWave += NUmberOfEachBoss[i];
         }
     }
     protected void OnEnable()
     {
-        Gate = false;
+        tagGate = false;
+        pointgate = false;
         LevelManager.Instance.WaveTag.gameObject.SetActive(true);
         LevelManager.Instance.Leveltag.gameObject.SetActive(true);
         StartCoroutine( LevelManager.Instance.WaveTag.GetComponent<waveTagPerform>().StartWavePerform(this.transform.name));
+        StartCoroutine(SpawnNorPointDelay());
     }
-    protected override void LoadComponents()
+    protected IEnumerator SpawnBossPointDelay()
     {
-        base.LoadComponents();
+        yield return new WaitUntil(predicate:()=>
+        {
+            return CurrentBoss.gameObject.activeInHierarchy;
+        });
+        Transform Pointer = BossPointSpawner.Instance.Spawn(BossPointSpawner.BossPointEnum.BossPoint.ToString(),CurrentBoss.position,Quaternion.identity);
+        Pointer.GetComponentInChildren<BossPoint>().Obj = CurrentBoss;
+        Pointer.GetComponentInChildren<EnePointDEspawn>().Obj = CurrentBoss;
     }
+    protected IEnumerator SpawnNorPointDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(predicate:()=>
+        {
+            if(NumberofPreEnemies > 0) return false;
+            return true;
+        });
+        yield return new WaitUntil(predicate:()=>
+        {
+            if(NumberofAliveEnemies  > 3 ) return false;
+            return true;
+        });
+        foreach(Transform element in ListEnemies)
+        {
+            if(element.gameObject.activeInHierarchy) 
+            {
+                Transform Pointer = BossPointSpawner.Instance.Spawn(BossPointSpawner.BossPointEnum.EnemyPoint.ToString(),element.transform.position,Quaternion.identity);
+                Pointer.GetComponentInChildren<EnePointDEspawn>().Obj = element;
+                Pointer.GetComponentInChildren<BossPoint>().Obj = element;
+            }
+        }
+    } 
     protected Vector3 RandomPosAroundPLayer(Vector2 Radius)
     {
         int Randradius = Random.Range((int)Radius.x,(int)Radius.y +1);
@@ -56,6 +90,14 @@ public class SpawnEnemies : MyBehaviour
         }
         ListEnemies.Add(Enemy);
     }
+    protected void AddToLIstBoss(Transform Boss)
+    {
+        for(int i = 0 ; i < ListBosses.Count ; i ++)
+        {
+            if(ListBosses[i] == Boss) return;
+        }
+        ListBosses.Add(Boss);
+    }
     protected void spawnenemie()
     {
         thistime  = Random.Range((int)TimeToSpawn[thisEnemie].x,(int)TimeToSpawn[thisEnemie].y +1); 
@@ -70,7 +112,8 @@ public class SpawnEnemies : MyBehaviour
                 ThisPos = MapManager.Instance.ListBossSapwnPos[rdPos]; 
             }
             else ThisPos = RandomPosAroundPLayer(DisAroundPlayer[thisEnemie]);
-            AddtoListEnemies(EnemiesSpawner.Instance.Spawn(EnemiesSpawner.Instance.EnemiesName[thisEnemie],ThisPos,Quaternion.identity));
+            Transform NewEne = EnemiesSpawner.Instance.Spawn(EnemiesSpawner.Instance.EnemiesName[thisEnemie],ThisPos,Quaternion.identity);
+            AddtoListEnemies(NewEne);
             NumberOfEachEnemy[thisEnemie]--;
         }
         if(EnemiesSpawner.Instance.ListEnemiesDefectSpawn.Count > 0 )
@@ -85,32 +128,38 @@ public class SpawnEnemies : MyBehaviour
             }
         }
     }
+    protected IEnumerator FreezeEnemies()
+    {
+        foreach(Transform ele in ListEnemies)
+        {
+            ele.GetComponentInChildren<TrackPlayer>().gameObject.SetActive(false);
+            ele.GetComponentInChildren<EnemieAct>().gameObject.SetActive(false);
+        }
+        yield return new WaitForSeconds(1f);
+        foreach(Transform ele in ListEnemies)
+        {
+            ele.GetComponentInChildren<TrackPlayer>().gameObject.SetActive(true);
+            ele.GetComponentInChildren<EnemieAct>().gameObject.SetActive(true);
+        }
+
+    }
     protected void spawnboss()
     {
         thistime  = 3; 
-        thisEnemie = Random.Range(0,NUmberOfEachBoss.Count);
-        timer += Time.deltaTime *1f;
-        if(timer >= thistime && NUmberOfEachBoss[thisEnemie] != 0)
+        if(CurrentBoss == null || !CurrentBoss.gameObject.activeInHierarchy)
         {
-            timer = 0 ;
-            int rdPos = Random.Range(0,MapManager.Instance.ListBossSapwnPos.Count);
-            ThisPos = MapManager.Instance.ListBossSapwnPos[rdPos]; 
-            Transform NewBoss  = BossSpawner.Instance.Spawn(BossSpawner.Instance.ListBossesname[thisEnemie],ThisPos,Quaternion.identity);
-            Transform Pointer = BossPointSpawner.Instance.Spawn(BossPointSpawner.BossPointEnum.BossPoint.ToString(),PlayerController.Instance.transform.position,Quaternion.identity);
-            Pointer.GetComponentInChildren<DespawnbyObj>().Obj = NewBoss;
-            Pointer.GetComponentInChildren<BossPoint>().Obj = NewBoss;
-            ListEnemies.Add(NewBoss);
-            NUmberOfEachBoss[thisEnemie]--;
-        }
-        if(BossSpawner.Instance.ListEnemiesDefectSpawn.Count > 0 )
-        {
-            for(int i = 0 ; i < BossSpawner.Instance.ListEnemiesDefectSpawn.Count ;i ++)
+            thisEnemie = Random.Range(0,NUmberOfEachBoss.Count);
+            timer += Time.deltaTime *1f;
+            if(timer >= thistime && NUmberOfEachBoss[thisEnemie] != 0)
             {
-                if(BossSpawner.Instance.ListEnemiesDefectSpawn[i].name == BossSpawner.Instance.ListBossesname[thisEnemie])
-                {
-                    NUmberOfEachBoss[thisEnemie]++;
-                    BossSpawner.Instance.ListEnemiesDefectSpawn.Remove(BossSpawner.Instance.ListEnemiesDefectSpawn[i]);
-                }
+                timer = 0 ;
+                int rdPos = Random.Range(0,MapManager.Instance.ListBossSapwnPos.Count);
+                ThisPos = MapManager.Instance.ListBossSapwnPos[rdPos]; 
+                CurrentBoss = BossSpawner.Instance.Spawn(BossSpawner.Instance.ListBossesname[thisEnemie],ThisPos,Quaternion.identity);
+                this.StartCoroutine(SpawnBossPointDelay());
+                this.StartCoroutine(FreezeEnemies());
+                AddToLIstBoss(CurrentBoss);
+                NUmberOfEachBoss[thisEnemie]--;
             }
         }
     }
@@ -122,7 +171,7 @@ public class SpawnEnemies : MyBehaviour
     protected void WaveSpawn()
     {
         this.spawnboss();
-        if(BossinWave > 0) return;
+        if(CurrentBoss == null && BossinWave > 0) return;
         spawnenemie();
     }
     protected void CountEnemy()
@@ -131,14 +180,18 @@ public class SpawnEnemies : MyBehaviour
         for(int i = 0 ; i < NUmberOfEachBoss.Count;i++) cache1 += NUmberOfEachBoss[i]; 
         for(int i = 0 ; i < NumberOfEachEnemy.Count;i++) cache1 += NumberOfEachEnemy[i]; 
         this.NumberofPreEnemies = cache1;
+        for(int i = 0 ; i < ListBosses.Count ; i++)
+        {
+            if(ListBosses[i].gameObject.activeInHierarchy) cache2 ++;
+        }
         for(int i = 0 ; i < ListEnemies.Count ; i++)
         {
             if(ListEnemies[i].gameObject.activeInHierarchy) cache2 ++;
         }
         this.NumberofAliveEnemies = cache2;
-        if(NumberofAliveEnemies + NumberofPreEnemies <= 0 && Gate == false)  
+        if(NumberofAliveEnemies + NumberofPreEnemies <= 0 && tagGate == false)  
         {
-            Gate = true;
+            tagGate = true;
             LevelManager.Instance.WaveTag.gameObject.SetActive(true);
             StartCoroutine( LevelManager.Instance.WaveTag.GetComponent<waveTagPerform>().ENdWavePerform(this.transform.gameObject.name));
         }

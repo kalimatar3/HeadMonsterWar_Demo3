@@ -10,7 +10,6 @@ public class Selectbutton : ButtonBase
         ModelManager.Instance.ActiveModel();
         GunCtrl.Instance.ActiveGun();
         base.Actbutton();
-        this.transform.gameObject.SetActive(false);
     }
     protected IEnumerator DelayLoad()
     {

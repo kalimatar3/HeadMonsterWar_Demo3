@@ -19,32 +19,32 @@ MonoBehaviour:
   FireExplosionName: ShotgunFireExplosion
   bulletSpeed: 50
   GunUpgrade:
-  - MaxAmmo: 2
-    Firerate: 0.5
-    Reloadtime: 2
-    Dame: 100
-    Range: 10
-  - MaxAmmo: 2
-    Firerate: 0.5
-    Reloadtime: 1.5
-    Dame: 70
-    Range: 20
-  - MaxAmmo: 2
+  - MaxAmmo: 4
     Firerate: 0.5
     Reloadtime: 1.5
     Dame: 100
     Range: 10
-  - MaxAmmo: 2
+  - MaxAmmo: 5
     Firerate: 0.5
     Reloadtime: 1.5
     Dame: 100
     Range: 10
-  - MaxAmmo: 2
+  - MaxAmmo: 6
     Firerate: 0.5
     Reloadtime: 1.5
     Dame: 100
     Range: 10
-  - MaxAmmo: 2
+  - MaxAmmo: 7
+    Firerate: 0.5
+    Reloadtime: 1.5
+    Dame: 100
+    Range: 10
+  - MaxAmmo: 8
+    Firerate: 0.5
+    Reloadtime: 1.5
+    Dame: 100
+    Range: 10
+  - MaxAmmo: 9
     Firerate: 0.5
     Reloadtime: 1.5
     Dame: 100

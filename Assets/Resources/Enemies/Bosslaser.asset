@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemiesName: Bosslaser
   SkillName: LazerHit
-  maxhp: 1300
+  maxhp: 600
   Dame: 20
   ListDroprate:
   - 0

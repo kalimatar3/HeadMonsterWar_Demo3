@@ -22,7 +22,7 @@ public class SpawnCoinUIindaily : SpawnCoinsUI
             return true;
         }); 
         int sum = 0;
-        while( sum < 5)
+        while(sum < 10)
         {
             SoundSpawner.Instance.Spawn(CONSTSoundsName.PickCoin,this.transform.position,Quaternion.identity);
             Transform Coin =  CoinUISpawner.Instance.Spawn("Coin",this.CoinStart.position,Quaternion.identity);
@@ -31,8 +31,8 @@ public class SpawnCoinUIindaily : SpawnCoinsUI
             thisCoinfly.StartPos = RandomPosAroundObj(CoinStart,new Vector2(1,2)); 
             thisCoinfly.EndPos = CoinEnd.position;
             sum ++;
-            yield return new WaitForSeconds(0.2f);
         }
+        yield return new WaitForSeconds(1f);
         this.transform.parent.gameObject.SetActive(false);
     }
     protected override void  ShowCoinText()

@@ -14,7 +14,8 @@ public class BossPointSpawner : Spawner
     }
     public enum BossPointEnum
     {
-        BossPoint
+        BossPoint,
+        EnemyPoint
     }
     protected void LoadBossPoint()
     {

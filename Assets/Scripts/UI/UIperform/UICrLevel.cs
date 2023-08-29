@@ -7,6 +7,6 @@ public class UICrLevel : UIperform
     protected override void PreformText()
     {
         base.PreformText();
-       Text.text = "Level " + (DataManager.Instance.CurrentLevel);
+       Text.text = "Level " + (DataManager.Instance.CurrentLevel + 2 ).ToString();
     }
 }

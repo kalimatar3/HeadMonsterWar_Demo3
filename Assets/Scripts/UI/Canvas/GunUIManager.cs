@@ -39,7 +39,7 @@ public class GunUIManager : MyBehaviour
         {
             ListGuns.Add(element);
             ListGunxPos.Add(basePOs);
-            basePOs -= 1800;
+            basePOs -= 3000;
         }
     }
     protected override void Start()
@@ -112,8 +112,8 @@ public class GunUIManager : MyBehaviour
                 }
             }
             ButtonManager.Instance.Currentbutton = ListGuns[Index];
+            StartCoroutine(ListGuns[Index].GetComponentInChildren<ButtonStatus>().Perform());
        }
-       //this.SliderStatus();
     }
     protected void SliderStatus()
     {

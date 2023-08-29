@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PlayerTopRotation : MyBehaviour
 {
@@ -15,12 +16,12 @@ public class PlayerTopRotation : MyBehaviour
         {
             timer = 0 ;
             cacheRos = this.transform.rotation;
-            Tip = new Vector3(InputManager.Instance.Shootingstick.Horizontal,0,InputManager.Instance.Shootingstick.Vertical *2);
+            Tip = new Vector3(InputManager.Instance.Shootingstick.Horizontal,0,InputManager.Instance.Shootingstick.Vertical / Mathf.Cos((Mathf.PI)/6));
             Angler = Vector3.Angle(this.transform.forward,PlayerController.Instance.transform.forward);
             this.transform.rotation = Quaternion.LookRotation(Tip);
             if(Angler >= 60 && new Vector3 (InputManager.Instance.MovingJoystick.Horizontal,0,InputManager.Instance.MovingJoystick.Vertical).magnitude <= 0) 
             {
-                PlayerController.Instance.transform.rotation = Quaternion.Lerp(PlayerController.Instance.transform.rotation,Quaternion.LookRotation(Tip),Time.deltaTime * 1f * 200f );
+                PlayerController.Instance.transform.rotation = Quaternion.Lerp(PlayerController.Instance.transform.rotation,Quaternion.LookRotation(Tip),Time.deltaTime * 1f * 500f );
             }
         }
         else

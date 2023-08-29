@@ -225,7 +225,6 @@ public class DataManager : MyBehaviour
                     return;
                 }
                 this.DcrGold(element.Cost);
-                ButtonManager.Instance.BuyButton.gameObject.SetActive(false);
                 element.Available = true ;
                 obj.gameObject.SetActive(false);
             }

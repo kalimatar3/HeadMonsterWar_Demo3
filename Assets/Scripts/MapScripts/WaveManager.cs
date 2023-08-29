@@ -54,6 +54,8 @@ public class WaveManager : MyBehaviour
                 if(Wave.GetComponent<SpawnEnemies>() == null) return;
                foreach(Transform enemie in Wave.GetComponent<SpawnEnemies>().ListEnemies)
                 if(enemie.gameObject.activeInHierarchy == true)  return;
+                foreach(Transform enemie in Wave.GetComponent<SpawnEnemies>().ListBosses)
+                if(enemie.gameObject.activeInHierarchy == true)  return;
             }
         }
         timer += Time.deltaTime * 1f;

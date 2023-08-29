@@ -44,15 +44,13 @@ public class TutorialLevel3 : TutorialLevel
            return true; 
         });
         TutorialUI.Instance.DeActivePanel();
+        yield return new WaitForSeconds(0.5f);
         TutorialUI.Instance.ActivePanel(7);
         yield return new WaitUntil(predicate:()=>
         {
             return !ShopGunPannel.gameObject.activeInHierarchy;
         });
         TutorialUI.Instance.DeActivePanel();
-        //TutorialUI.Instance.ActiveButton(3);
-        // PanelCtrl.Instance.HirePanel("ShopGunpanel");
-        // PanelCtrl.Instance.ShowPanel("MainMenuPannel");
         DataManager.Instance.TutorialLevel = 3;
     }   
 }

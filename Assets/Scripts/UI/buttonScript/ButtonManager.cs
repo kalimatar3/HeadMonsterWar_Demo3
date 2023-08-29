@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+
 public class ButtonManager : MyBehaviour
 {
     protected static ButtonManager instance;
@@ -11,9 +13,6 @@ public class ButtonManager : MyBehaviour
     public List<RectTransform> Listlockbutton;
     public List<RectTransform> ListSelectButton;
     public RectTransform Currentbutton;
-    public RectTransform SelectButton;
-    public RectTransform  ApprearButton;
-    public RectTransform BuyButton;
     public RectTransform cache;
     public RectTransform DailyRewardButton;
     protected override void Awake()
@@ -111,26 +110,6 @@ public class ButtonManager : MyBehaviour
     {
         SoundSpawner.Instance.Spawn(CONSTSoundsName.ButtonTap,Vector3.zero,Quaternion.identity);
     }
-    public void AppearButtonState()
-    {
-        this.Appearbutton();
-        if(Currentbutton == null) return;
-        this.BuyState();
-        this.SelectState();
-        this.SlectedState();
-    }
-    protected void Appearbutton()
-    {
-        for(int i = 0 ; i < ShopPanelManager.Instance.ListPanels.Count ; i++)
-        {
-            if(ShopPanelManager.Instance.ListPanels[i].gameObject.activeInHierarchy)
-            {
-                this.ApprearButton.gameObject.SetActive(true);
-                return;
-            }
-        }
-        this.ApprearButton.gameObject.SetActive(false);
-    }
     public void ClickDailyReward()
     {
         DataManager.Instance.LastTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -140,7 +119,6 @@ public class ButtonManager : MyBehaviour
     }
     protected void FixedUpdate()
     {
-        this.AppearButtonState();
         if(Currentbutton == null) Currentbutton = cache;
     }
     public void SettingMusicVolume()
@@ -162,38 +140,42 @@ public class ButtonManager : MyBehaviour
     {
         this.Buttonsound();
         DataManager.Instance.Unlock(Currentbutton);
+        this.StartCoroutine(Load());
+        ModelManager.Instance.ActiveModel();
+        GunCtrl.Instance.ActiveGun();
         Lsmanager.Instance.SaveGame();
     }
-    protected void BuyState()
+    protected IEnumerator Load()
     {
-        foreach(Transform locked in Listlockbutton)
+        yield return new WaitUntil(predicate:()=>
         {
-            if(locked.name == Currentbutton.name)
+            if(DataManager.Instance == null) return false;
+            return true;
+        });
+        yield return new WaitUntil(predicate:()=>
+        {
+            foreach(RectTransform ele in Listlockbutton)
             {
-                BuyButton.gameObject.SetActive(locked.gameObject.activeInHierarchy);
-                return;
+                if(Currentbutton == ele || Currentbutton == null) return false;
+                if(Currentbutton != ele) return true;
+            }
+            return true;
+        });
+        foreach(Transform element in ModelManager.Instance.ListModel)
+        {
+            if(element.name == Currentbutton.name)
+            {
+                DataManager.Instance.CurrentModelName = element.name;
             }
         }
-    }
-    protected void SelectState()
-    {
-        foreach(Transform locked in ListSelectButton)
+        foreach(Transform element in GunCtrl.Instance.ListGuns)
         {
-            if(locked.name == Currentbutton.name)
+            if(element.name == Currentbutton.name)
             {
-                SelectButton.gameObject.SetActive(locked.gameObject.activeInHierarchy);
-                return;
+                DataManager.Instance.CurrentGunName = element.name;
             }
         }
-    }
-    protected void SlectedState()
-    {        
-        if(DataManager.Instance  ==  null)  return;
-        if(Currentbutton.name == DataManager.Instance.CurrentModelName ||  Currentbutton.name == DataManager.Instance.CurrentGunName) 
-        {
-            BuyButton.gameObject.SetActive(false);
-            SelectButton.gameObject.SetActive(false);
-        }
+        Lsmanager.Instance.SaveGame();
     }
     public void ClickPauseGame()
     {

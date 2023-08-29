@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerUpgrade:
   - MaxHp: 100
+  - MaxHp: 120
+  - MaxHp: 140
+  - MaxHp: 160
+  - MaxHp: 180
   - MaxHp: 200
-  - MaxHp: 300
-  - MaxHp: 400
-  - MaxHp: 500
-  - MaxHp: 600

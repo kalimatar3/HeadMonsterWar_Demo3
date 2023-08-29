@@ -42,7 +42,7 @@ public class PanelCtrl : MyBehaviour
     {
         foreach(Transform panel in ListPanels)
         {
-          if(panel.name == Panelname)  panel.gameObject.SetActive(false);
+              if(panel.name == Panelname)  panel.gameObject.SetActive(false);
         }
     }
 }
