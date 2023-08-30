@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemiesName: Enemie_01
   SkillName: Punch
   maxhp: 100
-  Dame: 20
+  Dame: 5
   ListDroprate:
   - 0
   - 80

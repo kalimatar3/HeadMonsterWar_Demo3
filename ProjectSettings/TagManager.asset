@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FX
   - Environment
+  - Effects
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - LazerCanHIt
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 

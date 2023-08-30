@@ -24,11 +24,6 @@ public class DameReciver : MyBehaviour
     {
         this.ReBorn();
     }
-    // protected virtual void Dead()
-    // {
-    //     if(!Candead()) return;
-    //     else StartCoroutine(DelayDeath());
-    // }
     protected virtual IEnumerator Dead()
     {
         yield return new WaitUntil(predicate:()=>
@@ -37,7 +32,6 @@ public class DameReciver : MyBehaviour
         });
         yield return new WaitForSeconds(0.5f);
         this.Dying();
-
     }
     protected virtual void Dying()
     {

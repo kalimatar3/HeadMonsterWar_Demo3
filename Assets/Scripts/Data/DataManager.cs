@@ -373,7 +373,7 @@ public class DataManager : MyBehaviour
         this.CurrentModelName = "Model0";
         this.CurrentGunName = "Ak47";
         this.LastTime = "2023-08-09 15:30:45";
-        this.Coin = 99999;
+        this.Coin = 0;
         this.ListUpGradeAbleData = null;
         this.ListDropItemData = null;
         this.ListShopData = null;

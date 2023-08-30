@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemiesName: BossSpider
   SkillName: BossPunch
-  maxhp: 800
-  Dame: 30
+  maxhp: 1000
+  Dame: 15
   ListDroprate:
   - 0
   - 0

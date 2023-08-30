@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering;
 public abstract class ChanceMaterials : MyBehaviour
 {
-    [SerializeField] protected Material DefaultMaterial,NewMaterial;
+    [SerializeField] protected Material NewMaterial;
+    [SerializeField] protected Material[] DefaultMaterial,ListNewMaterial;
     [SerializeField] MeshRenderer thisren;
     protected override void LoadComponents()
     {
@@ -18,21 +19,29 @@ public abstract class ChanceMaterials : MyBehaviour
     }
     protected void LoadDefaultMaterial()
     {
-        this.DefaultMaterial = thisren.materials[0];
+        DefaultMaterial = thisren.materials;
+        for(int i = 0 ; i < thisren.materials.Length ; i++)
+        {
+           ListNewMaterial[i] = NewMaterial;
+        }
+    }
+    protected override void Start()
+    {
+        base.Start();
     }
     protected abstract bool CanChangce();
     protected void Chancing()
     {
         if(!CanChangce()) 
         {
-            thisren.sharedMaterial = DefaultMaterial;
-            return;
+            thisren.materials = DefaultMaterial;
+        return;
         }
         this.ChanceMaterial();
     }
     protected virtual void ChanceMaterial()
     {
-        thisren.sharedMaterial = NewMaterial;
+        thisren.materials = ListNewMaterial; 
     }
     protected void FixedUpdate()
     {

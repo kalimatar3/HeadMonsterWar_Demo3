@@ -20,6 +20,7 @@ public class GameoverPanelScript : MyBehaviour
     }
     protected IEnumerator DelayAppearObj()
     {
+        this.ReviveButton.gameObject.SetActive(PlayerController.Instance.PlayerReciver.CanRevise);
         foreach(Transform ele in ListObjDelayAppear)
         {
             ele.gameObject.SetActive(false);
@@ -33,7 +34,6 @@ public class GameoverPanelScript : MyBehaviour
             if(BackGround.color == color) return true;
             return false;
         });
-        this.ReviveButton.gameObject.SetActive(PlayerController.Instance.PlayerReciver.CanRevise);
         for(int i = 0 ; i < ListObjDelayAppear.Count ; i++)
         {
             ListObjDelayAppear[i].gameObject.SetActive(true);

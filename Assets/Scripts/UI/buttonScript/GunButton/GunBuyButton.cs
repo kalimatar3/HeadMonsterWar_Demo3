@@ -9,7 +9,7 @@ public class GunBuyButton : BuyButton
         DataManager.Instance.Unlock(ButtonStatus.Lock);
         foreach(RectTransform element in ButtonManager.Instance.ListSelectButton)
         {
-            if(ButtonStatus.Select.name == element.name)
+            if(ButtonStatus.Select.name == element.name && !ButtonStatus.Lock.gameObject.activeInHierarchy)
             {
                 DataManager.Instance.CurrentGunName = ButtonStatus.Select.name;
             }

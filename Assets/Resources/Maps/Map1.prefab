@@ -125542,6 +125542,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139761887383091337, guid: 2c73e9e1a0602e94f9b6e13ed87f4588, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b95dc2ef21f8d34491d49be528b6510, type: 2}
+    - target: {fileID: 5139761887383091337, guid: 2c73e9e1a0602e94f9b6e13ed87f4588, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b95dc2ef21f8d34491d49be528b6510, type: 2}
     - target: {fileID: 7737845069996887261, guid: 2c73e9e1a0602e94f9b6e13ed87f4588, type: 3}
       propertyPath: m_Name
       value: Filler_Housing
@@ -125553,6 +125561,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2592687398133983700, guid: 2c73e9e1a0602e94f9b6e13ed87f4588, type: 3}
   m_PrefabInstance: {fileID: 7019282286735851665}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2755528115426588696 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5139761887383091337, guid: 2c73e9e1a0602e94f9b6e13ed87f4588, type: 3}
+  m_PrefabInstance: {fileID: 7019282286735851665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &723910848992054348 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7737845069996887261, guid: 2c73e9e1a0602e94f9b6e13ed87f4588, type: 3}
+  m_PrefabInstance: {fileID: 7019282286735851665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1026203997532750702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723910848992054348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46150421c86e654a96ccc79b75bb0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewMaterial: {fileID: 2100000, guid: 078100cbea84c344f84bc3dd0e798186, type: 2}
+  DefaultMaterial:
+  - {fileID: 0}
+  - {fileID: 0}
+  ListNewMaterial:
+  - {fileID: 0}
+  - {fileID: 0}
+  thisren: {fileID: 2755528115426588696}
 --- !u!1001 &7019282286807538497
 PrefabInstance:
   m_ObjectHideFlags: 0

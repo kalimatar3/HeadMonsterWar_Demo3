@@ -33,7 +33,7 @@ public class PlayerReciver : DameReciver
     }
     protected override void Dying()
     {
-        if( this.CurrentHp <= 0)
+        if(this.CurrentHp <= 0)
         {
             HolderManager.Instance.DeActiveHolder("SoundHolder");
             PanelCtrl.Instance.ShowPanel("GameOverPanel");
@@ -47,6 +47,7 @@ public class PlayerReciver : DameReciver
     public override void ReBorn()
     {
         this.StartCoroutine(this.RebornDelay());
+        StartCoroutine(this.TakeDameDelay());
     }
     protected IEnumerator RebornDelay()
     {
@@ -64,11 +65,9 @@ public class PlayerReciver : DameReciver
     }
     public override void DeductHp(float dame)
     {
-        SoundSpawner.Instance.Spawn(CONSTSoundsName.Attacked,Vector3.zero,Quaternion.identity);
         if(CanTakeDame)
         {
-            CanTakeDame = false;
-            timer = 0;
+            SoundSpawner.Instance.Spawn(CONSTSoundsName.Attacked,Vector3.zero,Quaternion.identity);
             if(CurinvulnerableNumber > 0)
             {
                 CurinvulnerableNumber --;
@@ -79,11 +78,12 @@ public class PlayerReciver : DameReciver
                if(!DataManager.Instance.GamePlayMode) base.DeductHp(10);
                 else base.DeductHp(dame);
             }
-            StartCoroutine(TakeDameDelay());
         }
     }
     protected IEnumerator TakeDameDelay()
     {
+        timer = 0;
+        CanTakeDame = false;
         while(CanTakeDame == false)
         {
             yield return timer += Time.deltaTime * 1f;

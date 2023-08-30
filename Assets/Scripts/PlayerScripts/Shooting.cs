@@ -9,7 +9,7 @@ public class Shooting : PlayerAct
     [SerializeField] protected Transform Guntip;
     [SerializeField] protected float FireRate,Dame;
     [Header(" Ammo ")]
-    [SerializeField] protected float Reloadtime;
+    [SerializeField] public float Reloadtime;
     [SerializeField] public float MaxAmmo,CurrentAmmo;
     public float reloadtimer,firetimer;
     [SerializeField] protected string Bulletname,ThisExplosionFireName,ThisExplosionHitName;

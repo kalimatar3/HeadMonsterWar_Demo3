@@ -6,7 +6,7 @@ public class EnvironmentMaterial : ChanceMaterials
 {
     protected override bool CanChangce()
     {
-        EnvironmentReciver environmentReciver = GetComponentInParent<EnvironmentReciver>();
+        EnvironmentReciver environmentReciver = GetComponent<EnvironmentReciver>();
         if(environmentReciver == null) return false;
         return environmentReciver.Camblock;
     }

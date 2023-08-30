@@ -7,7 +7,7 @@ public class TrackPlayer : MyBehaviour
 {
     [SerializeField] protected float speed;
     [SerializeField] protected float stopDis;
-    [SerializeField] protected NavMeshAgent thisNav; 
+    [SerializeField] public NavMeshAgent thisNav; 
     public bool Tracking;
     [SerializeField] protected EnemieCtrl EnemieCtrl;
     protected override void LoadComponents()
