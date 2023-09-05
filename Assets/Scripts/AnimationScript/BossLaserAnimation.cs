@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossLaserAnimation : MyBehaviour
 {
     public EnemieCtrl enemieCtrl;
-    [SerializeField] protected Animator Animator;
+    [SerializeField] protected Animator TopAnimator,UnderAnimator;
     [SerializeField] protected int State;
     protected int INDLE = 0 
     ,RUN = 1,
@@ -26,6 +26,7 @@ public class BossLaserAnimation : MyBehaviour
         if(enemieCtrl.TrackPlayer.Tracking) State = RUN;
         else State = ATTACK;
         if(enemieCtrl.EnemiesReciver.CurrentHp <= 0) State = DIE;
-        Animator.SetInteger(StringConts.BossLazerAnim,State);
+        TopAnimator.SetInteger(StringConts.BossLazerAnim,State);
+        UnderAnimator.SetInteger(StringConts.BossLazerAnim,State);
     }
 }

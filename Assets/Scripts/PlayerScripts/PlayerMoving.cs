@@ -41,7 +41,7 @@ public Vector3 Move;
     protected void StepSound()
     {
         soundtimer += Time.deltaTime * 1f;
-        if(Move.magnitude >=1 && soundtimer > 4 *1 /CurrentSpeed)
+        if(Move.magnitude >=1 && soundtimer > 0.38f)
         {
             soundtimer =0;
             if(!LR) 

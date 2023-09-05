@@ -11,15 +11,11 @@ public class DealToEnemies : DameDealer
         EnemiesReciver enemiesReciver =  obj.transform.GetComponent<EnemiesReciver>();
         if(enemiesReciver == null) return;
         enemiesReciver.DeductHp(this.dealnumber);
+        EffectSpawner.Instance.Spawn(ExplosionHitName,this.transform.position,this.transform.rotation);
         if(!CanThroughObj) 
         {
-            EffectSpawner.Instance.Spawn(ExplosionHitName,this.transform.position,this.transform.rotation);
             BulletSpawner.Instance.DeSpawnToPool(this.transform.parent);
         }
         base.SendDametoObj(obj);
-    }
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
     }
 }

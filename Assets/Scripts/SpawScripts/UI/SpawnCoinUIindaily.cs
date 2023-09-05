@@ -32,7 +32,7 @@ public class SpawnCoinUIindaily : SpawnCoinsUI
             thisCoinfly.EndPos = CoinEnd.position;
             sum ++;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         this.transform.parent.gameObject.SetActive(false);
     }
     protected override void  ShowCoinText()

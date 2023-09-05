@@ -39,7 +39,7 @@ public class SpawnCoinsUI : MyBehaviour
         sum = 0;
         while( sum < 10)
         {
-            Transform Coin =  CoinUISpawner.Instance.Spawn("Coin",this.CoinStart.position,Quaternion.identity);
+            Transform Coin =  CoinUISpawner.Instance.Spawn("Coin",this.CoinStart.position,new Quaternion(0,0,25,0));
             CoinFly thisCoinfly = Coin.GetComponentInChildren<CoinFly>();
             thisCoinfly.SpawnPos = this.CoinStart.position;
             thisCoinfly.StartPos = RandomPosAroundObj(CoinStart,new Vector2(1,2)); 

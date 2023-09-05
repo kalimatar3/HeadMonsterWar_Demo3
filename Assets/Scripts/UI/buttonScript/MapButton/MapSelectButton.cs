@@ -15,7 +15,7 @@ public class MapSelectButton : SelectButton
         }
         base.Actbutton();
         //Lsmanager.Instance.SaveGame();
-        ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name); 
+          StartCoroutine(ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name));
         this.StartCoroutine(MapManager.Instance.DelayLoadMap());
     } 
 }

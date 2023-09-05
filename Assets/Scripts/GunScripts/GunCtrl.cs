@@ -10,6 +10,7 @@ public class GunCtrl : MyBehaviour
     public List<GunsSO> ListGunSO;
     [SerializeField] protected Shooting shooting;
     public Shooting Shooting { get => shooting;}
+    [SerializeField] protected Transform ReloadPanel;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -36,6 +37,7 @@ public class GunCtrl : MyBehaviour
     {
         if(shooting != null) return;
         shooting = GetComponentInChildren<Shooting>();
+        shooting.ReloadPanel = ReloadPanel;
     }
     protected virtual void LoadGunSO()
     {

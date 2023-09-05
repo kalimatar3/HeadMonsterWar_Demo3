@@ -6,7 +6,7 @@ public class EnemieHpbar : Hpbar
 {
     protected virtual void LoadHp()
     {
-        this.CurrentHp = this.DameReciver.GetComponent<EnemiesReciver>().CurrentHp;
+        CurrentHp = this.DameReciver.GetComponent<EnemiesReciver>().CurrentHp;
         this.MaxHp = this.DameReciver.GetComponent<EnemiesReciver>().MaxHp;
     }
     protected override void ShowHp()

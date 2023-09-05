@@ -14,7 +14,7 @@ public static class CONSTSoundsName
     DameUp = "Damage up",
     Invulnerable ="Invulnerable" ,
     Win = "Success",
-    BossDead = "Big Explosion 19",
+    EnemyDead = "Enemy Die",
     GameOver = "GameOver",
     SpeedUp ="speedUp",
     ButtonTap = "ButtonTap",

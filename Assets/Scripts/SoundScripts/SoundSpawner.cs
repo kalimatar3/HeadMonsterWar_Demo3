@@ -55,7 +55,6 @@ public class SoundSpawner : Spawner
         AudioSource audioSource = Newpre.GetComponent<AudioSource>();
         audioSource.outputAudioMixerGroup = this.EffectMixer;
         if(audioSource == null) Debug.LogWarning("Can founnd audiosourse" + PrefabName);
-        //if(Newpre.transform.gameObject.activeInHierarchy) audioSource.PlayOneShot(GetAudioClipbyName(PrefabName));
         return Newpre;
     }
     protected void LoadListtAudioClips()
@@ -76,12 +75,6 @@ public class SoundSpawner : Spawner
     }
     public void Play_audio(string Name)
     {
-        foreach(AudioClip element in ListAudioClips)
-        {
-            if(element.name == Name)
-            {
-                AudioSource.PlayOneShot(element);
-            }
-        }
+        AudioSource.PlayOneShot(GetAudioClipbyName(Name));
     }
 }

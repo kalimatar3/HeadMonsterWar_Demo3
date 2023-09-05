@@ -10,7 +10,7 @@ public class DealToEnvironments : DameDealer
         base.SendDametoObj(obj);
         EnvironmentReciver environmentReciver  = obj.GetComponent<EnvironmentReciver>();
         if(environmentReciver== null) return;
-        EffectSpawner.Instance.Spawn(ExplosionHitName,this.transform.position,this.transform.rotation);
+        EffectSpawner.Instance.Spawn("ExplosionToEn",this.transform.position,this.transform.rotation);
         BulletSpawner.Instance.DeSpawnToPool(this.transform.parent); 
     }
 }

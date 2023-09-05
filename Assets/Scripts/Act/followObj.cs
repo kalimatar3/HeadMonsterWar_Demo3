@@ -12,7 +12,7 @@ public class followObj : MyBehaviour
         Vector3 newPos = Vector3.Lerp(this.transform.parent.position, Obj.transform.position,this.smooth);
         this.transform.parent.position = newPos;
     }
-    protected void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         this.follow();
     }

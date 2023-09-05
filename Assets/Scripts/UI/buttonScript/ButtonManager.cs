@@ -87,7 +87,7 @@ public class ButtonManager : MyBehaviour
     public void LoadMap(Transform obj)
     {
         DataManager.Instance.CurrentMap = DataManager.Instance.GetReferanceName(obj);
-        ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name));
         Lsmanager.Instance.SaveGame();
     }
     public void LoadPlayerModel(Transform obj)
@@ -184,5 +184,9 @@ public class ButtonManager : MyBehaviour
     public void ClickResumeGame()
     {
         GameManager.Instance.ResumeGame();
+    }
+    public void IncreaseCoin(int value)
+    {
+        DataManager.Instance.IcrGold(value);
     }
 }

@@ -13,6 +13,7 @@ public class Shooting : PlayerAct
     [SerializeField] public float MaxAmmo,CurrentAmmo;
     public float reloadtimer,firetimer;
     [SerializeField] protected string Bulletname,ThisExplosionFireName,ThisExplosionHitName;
+    [SerializeField] public Transform ReloadPanel;
     protected Transform ThisBullet;
     protected float BulletSpeed,Range;
     protected bool CanThroughObj;
@@ -43,6 +44,7 @@ public class Shooting : PlayerAct
     public virtual void reborn()
     {
         this.Getbulletdata();
+        this.ReloadPanel.gameObject.SetActive(false);
         this.CurrentAmmo = this.MaxAmmo;
     }
     protected virtual void Reload()
@@ -52,6 +54,7 @@ public class Shooting : PlayerAct
             if(reloadtimer > 0) reloadtimer -= Time.deltaTime * 1f;
             else
             {
+                this.ReloadPanel.gameObject.SetActive(false);
                 Reloadgate = false; 
                 reloadtimer = 0;
                 CurrentAmmo = MaxAmmo;
@@ -62,6 +65,7 @@ public class Shooting : PlayerAct
     {
         if(CurrentAmmo < MaxAmmo) 
         {
+            this.ReloadPanel.gameObject.SetActive(true);
             SoundSpawner.Instance.Spawn(CONSTSoundsName.Reload,Vector3.zero,Quaternion.identity);
             reloadtimer = Reloadtime;
             Reloadgate = true;

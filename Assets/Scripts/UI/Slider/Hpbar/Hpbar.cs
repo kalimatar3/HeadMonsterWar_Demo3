@@ -8,7 +8,7 @@ using TMPro;
 public class Hpbar : BaseSlider
 {
     [SerializeField] public Transform DameReciver;
-    [SerializeField] protected float CurrentHp,MaxHp;
+    [SerializeField] public float CurrentHp,MaxHp;
     protected TextMeshPro Hpnumber;
 
     protected override void LoadComponents()

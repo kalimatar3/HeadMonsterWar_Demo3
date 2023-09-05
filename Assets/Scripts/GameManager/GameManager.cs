@@ -27,6 +27,7 @@ public class GameManager : MyBehaviour
                 else return true;
             }
         });
+        yield return new WaitForSeconds(1f);
         DataManager.Instance.LastTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         PanelCtrl.Instance.ShowPanel("DailyRewardpannel");
     }
@@ -62,8 +63,8 @@ public class GameManager : MyBehaviour
     }
     public void Replay()
     {
-      ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
-      this.StartCoroutine(MapManager.Instance.DelayLoadMap());
+      StartCoroutine(ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name));
+      StartCoroutine(MapManager.Instance.DelayLoadMap());
     }
     public void PauseGame()
     {

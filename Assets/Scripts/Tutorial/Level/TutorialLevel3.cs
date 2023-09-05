@@ -28,7 +28,7 @@ public class TutorialLevel3 : TutorialLevel
             return ShopGunPannel.gameObject.activeInHierarchy;
         });
         TutorialUI.Instance.DeActivePanel();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         TutorialUI.Instance.ActivePanel(4);
         yield return new WaitUntil(predicate:()=>
         {
@@ -37,14 +37,12 @@ public class TutorialLevel3 : TutorialLevel
         });
         TutorialUI.Instance.DeActivePanel();
         TutorialUI.Instance.ActivePanel(5);
-        yield return new WaitForSeconds(2f);
         yield return new WaitUntil(predicate:()=>
         {
            if(DataManager.Instance.CurrentGunName != "Shotgun") return false;
            return true; 
         });
         TutorialUI.Instance.DeActivePanel();
-        yield return new WaitForSeconds(0.5f);
         TutorialUI.Instance.ActivePanel(7);
         yield return new WaitUntil(predicate:()=>
         {

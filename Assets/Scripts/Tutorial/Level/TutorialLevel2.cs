@@ -104,8 +104,7 @@ public class TutorialLevel2 : TutorialLevel
             if(FistBoss.gameObject.activeInHierarchy) return false;
             return true;
         });
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         this.IsDone = true;
     }   
-
 }

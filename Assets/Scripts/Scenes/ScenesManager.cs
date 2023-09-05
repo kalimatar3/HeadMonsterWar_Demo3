@@ -26,10 +26,10 @@ public class ScenesManager : MyBehaviour
     }
     protected override void Start()
     {
-        ScenesManager.Instance.LoadScene(SceneManager.GetActiveScene().name);        
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().name));        
         base.Start();
     }
-    public async void LoadScene(string SceneName)
+    public IEnumerator LoadScene(string SceneName)
     {
        var Scene = SceneManager.LoadSceneAsync(SceneName);
        Scene.allowSceneActivation = false;
@@ -37,14 +37,16 @@ public class ScenesManager : MyBehaviour
         do
         {
             LoadingSlider.value = Scene.progress;
-            await Task.Delay(500);
-        } while(!this.Canload());
+            yield return new WaitForSeconds(0.1f);
+        }   while(!this.Canload() ||LoadingSlider.value < 0.9f);
+        yield return new WaitForSeconds(0.2f);
        Scene.allowSceneActivation = true;
        LoadingScene.gameObject.SetActive(false);
    }
    protected bool Canload()
    {
     if(DataManager.Instance.CurrentMap == null) return false;
+    if(DataManager.Instance.ListShopData == null) return false;
     if(MapManager.Instance.ListBossSapwnPos == null) return false;
     return true;
    }

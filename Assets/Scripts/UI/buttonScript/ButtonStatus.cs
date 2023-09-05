@@ -35,6 +35,7 @@ public class ButtonStatus : MyBehaviour
             if(this.Lock.name == element.Name)
             {
                BuyButton.gameObject.SetActive(!element.Available);
+               BuyButton.GetComponent<BuyButton>().ShowCantBuybutton();
             }
         }
     }
@@ -45,7 +46,6 @@ public class ButtonStatus : MyBehaviour
             Selectbutton.gameObject.SetActive(false);
             BuyButton.gameObject.SetActive(false);
         }
-
     }
     public virtual IEnumerator Perform()
     {
