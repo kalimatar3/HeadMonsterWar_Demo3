@@ -174,7 +174,6 @@ GameObject:
   - component: {fileID: 2482613283249189624}
   - component: {fileID: 5137018017313278851}
   - component: {fileID: 7806476446096633783}
-  - component: {fileID: 612948866226193023}
   - component: {fileID: 5875128785094462865}
   m_Layer: 0
   m_Name: LM_Liquor
@@ -244,21 +243,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &612948866226193023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113505414083909400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealnumber: 0
-  ExplosionHitName: 
-  CanThroughObj: 0
 --- !u!114 &5875128785094462865
 MonoBehaviour:
   m_ObjectHideFlags: 0

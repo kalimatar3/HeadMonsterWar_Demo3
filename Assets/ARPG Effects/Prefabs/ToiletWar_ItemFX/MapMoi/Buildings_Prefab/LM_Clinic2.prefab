@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6103721894426219678}
   - component: {fileID: 4271824955581958818}
   - component: {fileID: 1040079271432738721}
-  - component: {fileID: 5249177009670133902}
   - component: {fileID: 2757350464399252245}
   m_Layer: 0
   m_Name: LM_Clinic2
@@ -131,21 +130,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &5249177009670133902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4467655510494754443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealnumber: 0
-  ExplosionHitName: 
-  CanThroughObj: 0
 --- !u!114 &2757350464399252245
 MonoBehaviour:
   m_ObjectHideFlags: 0

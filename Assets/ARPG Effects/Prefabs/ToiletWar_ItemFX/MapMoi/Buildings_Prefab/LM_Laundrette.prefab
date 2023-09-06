@@ -563,7 +563,6 @@ GameObject:
   - component: {fileID: 6259497145889980096}
   - component: {fileID: 7033685034765299519}
   - component: {fileID: 4632002227655633483}
-  - component: {fileID: 1619375887237004141}
   - component: {fileID: 2682686667107245713}
   m_Layer: 0
   m_Name: LM_Laundrette
@@ -649,21 +648,6 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
---- !u!114 &1619375887237004141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002960272328426132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealnumber: 0
-  ExplosionHitName: 
-  CanThroughObj: 0
 --- !u!114 &2682686667107245713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHp: 100000000
   CurrentHp: 0
+  DropGate: 0
 --- !u!1 &2027697620745753203
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,6 @@ public class BossSpawner : Spawner
         HpbarTrans.GetComponentInChildren<followObj>().Obj = newPre;
         HpbarTrans.gameObject.SetActive(false);
         HpbarTrans.gameObject.SetActive(true);
-        //HpbarTrans.GetComponentInChildren<DeSpawnHpbar>().Obj = newPre;
         EnemieHpbar Hpbar = HpbarTrans.GetComponentInChildren<EnemieHpbar>();
         // SO
         EnemiesReciver enemiesReciver = newPre.GetComponentInChildren<EnemiesReciver>();

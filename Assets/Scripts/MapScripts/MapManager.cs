@@ -7,6 +7,7 @@ public class MapManager : MyBehaviour
     protected static MapManager instance;
     public static MapManager Instance { get => instance ;}
     public List<Vector3> ListBossSapwnPos;
+    public List<Vector3> ListEnemySpawnPos;
     protected override void Awake()
     {
         base.Awake();
@@ -33,11 +34,15 @@ public class MapManager : MyBehaviour
         thisMap = Instantiate(Resources.Load<Transform>(path));
         thisMap.name = Mapname;
         thisMap.transform.SetParent(this.transform);
-        //DontDestroyOnLoad(thisMap.transform.gameObject);
         Transform bossspawnPos = thisMap.transform.Find("BossSpawnPos");
         foreach(Transform element in bossspawnPos)
         {
             ListBossSapwnPos.Add(element.position);
+        }
+        Transform EnemySpawnTrans = thisMap.transform.Find("EnemySpawnPos");
+        foreach(Transform element in EnemySpawnTrans)
+        {
+            ListEnemySpawnPos.Add(element.position);
         }
     }
     protected void SpawnMap(string Mapname)

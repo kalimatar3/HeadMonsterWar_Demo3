@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0d2331344fd81a34fa508f94027131bb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4eb18813da7b9fe4a9ce5a9aef434ba9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -140,12 +140,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
+  - m_ConditionMode: 6
     m_ConditionEvent: BossLazerState
-    m_EventTreshold: 1
-  - m_ConditionMode: 4
-    m_ConditionEvent: BossLazerState
-    m_EventTreshold: 3
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5665928765504113459}
   m_Solo: 0
@@ -199,7 +196,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 4259997355605404336}
-    m_Position: {x: 650, y: 260, z: 0}
+    m_Position: {x: 720, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1559420230405095663}
     m_Position: {x: 300, y: 260, z: 0}

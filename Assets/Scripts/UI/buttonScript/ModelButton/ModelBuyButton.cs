@@ -15,6 +15,5 @@ public class ModelBuyButton : BuyButton
             }
         }
         base.Actbutton();
-        //Lsmanager.Instance.SaveGame();
     }  
 }

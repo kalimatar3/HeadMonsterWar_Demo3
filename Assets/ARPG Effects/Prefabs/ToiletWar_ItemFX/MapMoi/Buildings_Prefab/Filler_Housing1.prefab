@@ -2307,7 +2307,6 @@ GameObject:
   - component: {fileID: 8120902320883500685}
   - component: {fileID: 2368407039433753070}
   - component: {fileID: 1645699490642094989}
-  - component: {fileID: 4860524579791288279}
   - component: {fileID: 5431887859047953624}
   m_Layer: 0
   m_Name: Filler_Housing1
@@ -2381,21 +2380,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &4860524579791288279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6646854345581737596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealnumber: 0
-  ExplosionHitName: 
-  CanThroughObj: 0
 --- !u!114 &5431887859047953624
 MonoBehaviour:
   m_ObjectHideFlags: 0

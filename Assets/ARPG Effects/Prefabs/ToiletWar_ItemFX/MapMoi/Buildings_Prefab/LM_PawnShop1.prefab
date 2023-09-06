@@ -1149,7 +1149,6 @@ GameObject:
   - component: {fileID: 1678737774913569099}
   - component: {fileID: 7982050150226105180}
   - component: {fileID: 5816311239119468933}
-  - component: {fileID: 4599812863670397880}
   m_Layer: 0
   m_Name: LM_PawnShop1
   m_TagString: Untagged
@@ -1243,21 +1242,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.17642546, y: 0.12644748, z: 0.15801495}
   m_Center: {x: 0.00042948127, y: -0.014146633, z: -0.013257429}
---- !u!114 &4599812863670397880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9034393389204782505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealnumber: 0
-  ExplosionHitName: 
-  CanThroughObj: 0
 --- !u!1 &9129092943625556954
 GameObject:
   m_ObjectHideFlags: 0

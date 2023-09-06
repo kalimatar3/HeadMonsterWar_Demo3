@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class SpawnEnemies : MyBehaviour
 {
     [SerializeField] protected List<int> NumberOfEachEnemy;
     [SerializeField] protected List<int> NUmberOfEachBoss;
-    [SerializeField] protected List<Vector2> DisAroundPlayer;
     [SerializeField] protected List<Vector2> TimeToSpawn;
     public List<Transform> ListEnemies,ListBosses;
+    [SerializeField] protected List<Vector3> ListEnemyCanSpawnPos;
     [SerializeField] protected Transform CurrentBoss;
     [SerializeField] int BossinWave;
     protected float timer;
     protected int thisEnemie,thistime;
     public float NumberofPreEnemies,NumberofAliveEnemies;
     public int MaxNumberofEnemies;
-    protected Vector3 ThisPos;
+    [SerializeField] protected Vector3 ThisPos;
     [SerializeField] protected bool tagGate,pointgate;
     protected override void Start()
     {
@@ -105,13 +106,8 @@ public class SpawnEnemies : MyBehaviour
         timer += Time.deltaTime *1f;
         if(timer >= thistime && NumberOfEachEnemy[thisEnemie] != 0)
         {
+            this.EnemySpawnPos();
             timer = 0 ;
-            if(thisEnemie > 1) 
-            {
-                int rdPos = Random.Range(0,MapManager.Instance.ListBossSapwnPos.Count);
-                ThisPos = MapManager.Instance.ListBossSapwnPos[rdPos]; 
-            }
-            else ThisPos = RandomPosAroundPLayer(DisAroundPlayer[thisEnemie]);
             Transform NewEne = EnemiesSpawner.Instance.Spawn(EnemiesSpawner.Instance.EnemiesName[thisEnemie],ThisPos,Quaternion.identity);
             AddtoListEnemies(NewEne);
             NumberOfEachEnemy[thisEnemie]--;
@@ -125,6 +121,24 @@ public class SpawnEnemies : MyBehaviour
                     NumberOfEachEnemy[thisEnemie]++;
                     EnemiesSpawner.Instance.ListEnemiesDefectSpawn.Remove(EnemiesSpawner.Instance.ListEnemiesDefectSpawn[i]);
                 }
+            }
+        }
+    }
+    protected void EnemySpawnPos()
+    {
+        foreach(Vector3 elment in MapManager.Instance.ListEnemySpawnPos)
+        {
+            Vector3 Dir = elment - PlayerController.Instance.transform.position;
+            if(Dir.magnitude >= 35f)    ListEnemyCanSpawnPos.Add(elment);        
+        }
+        float Min = 10000f;
+        foreach(Vector3 ele in ListEnemyCanSpawnPos)
+        {
+            Vector3 Dir = ele - PlayerController.Instance.transform.position;
+            if(Dir.magnitude <= Min) 
+            {
+                ThisPos = ele;
+                Min = Dir.magnitude;
             }
         }
     }

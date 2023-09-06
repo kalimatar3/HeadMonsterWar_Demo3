@@ -81,12 +81,12 @@ public class TutorialLevel2 : TutorialLevel
             {
                 if(HolderManager.Instance.ListHolder[i].name == "BossesHolder")
                 {
-                    if(HolderManager.Instance.ListHolder[i].childCount >0) 
+                    if(HolderManager.Instance.ListHolder[i].childCount > 0) 
                     FistBoss = HolderManager.Instance.ListHolder[i].GetChild(0);
                 }
             }
             if(FistBoss == null) return false;
-            return FistBoss.gameObject.activeInHierarchy;
+            return true;
         });
         yield return new WaitForSeconds(4f);
         TutorialUI.Instance.ActiveButton(4);

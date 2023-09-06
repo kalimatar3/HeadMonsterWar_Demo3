@@ -10,11 +10,16 @@ public class EnemiesReciver : DameReciver
     public override void ReBorn()
     {
         base.ReBorn();
-        this.EnemieCtrl.TrackPlayer.thisNav.enabled = true;
         foreach(Transform element in EnemieCtrl.transform)
         {
             element.gameObject.SetActive(true);
         }
+        this.EnemieCtrl.EnemieAct.gameObject.SetActive(true);
+        if(this.EnemieCtrl.EnemieAct1 != null)
+        {
+            this.EnemieCtrl.EnemieAct1.gameObject.SetActive(true);
+        }
+
         this.EnemieCtrl.GetComponent<BoxCollider>().enabled = true;
         DropGate = false;
         GetComponent<CapsuleCollider>().enabled = true;
@@ -35,9 +40,13 @@ public class EnemiesReciver : DameReciver
         {
             return Candead();
         });
-        if(this.EnemieCtrl.TrackPlayer.thisNav != null)
-        this.EnemieCtrl.TrackPlayer.thisNav.enabled = false;
+        EffectSpawner.Instance.Spawn(CONSTEffect.EnemyDeadEffect,this.transform.position,this.transform.rotation);
+        this.EnemieCtrl.TrackPlayer.thisNav.speed = 0;
         this.EnemieCtrl.EnemieAct.gameObject.SetActive(false);
+        if(this.EnemieCtrl.EnemieAct1 != null)
+        {
+            this.EnemieCtrl.EnemieAct1.gameObject.SetActive(false);
+        }
         this.EnemieCtrl.TrackPlayer.gameObject.SetActive(false);
         GetComponent<CapsuleCollider>().enabled = false;
         this.EnemieCtrl.GetComponent<BoxCollider>().enabled = false;

@@ -74,7 +74,9 @@ public class PlayerReciver : DameReciver
             }
             else
             {
-                PanelCtrl.Instance.ShowPanel("TakeDamePanel");
+               Transform panel = TakeDamePanelSpawner.Instance.Spawn(TakeDamePanelSpawner.Instance.TakeDamePanel,Vector3.zero,Quaternion.identity);
+               panel.GetComponent<RectTransform>().localPosition = new Vector3(0,0,0);
+               panel.GetComponent<RectTransform>().localScale = new Vector3(1,1,1);
                if(!DataManager.Instance.GamePlayMode) base.DeductHp(10);
                 else base.DeductHp(dame);
             }

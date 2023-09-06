@@ -13,6 +13,8 @@ public class EnemieCtrl : MyBehaviour
     public EnemiesReciver EnemiesReciver => enemiesReciver;
     [SerializeField] protected EnemieAct enemieAct;
     public EnemieAct EnemieAct => enemieAct;
+    [SerializeField] public EnemieAct EnemieAct1;
+
 
     protected override void LoadComponents()
     {

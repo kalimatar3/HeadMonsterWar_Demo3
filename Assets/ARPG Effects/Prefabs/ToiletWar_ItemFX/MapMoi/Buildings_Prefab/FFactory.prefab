@@ -1665,7 +1665,6 @@ GameObject:
   - component: {fileID: 347547791017171634}
   - component: {fileID: 4066958017533543492}
   - component: {fileID: 2216228078685779745}
-  - component: {fileID: 3853417014067121141}
   - component: {fileID: 6072001643299766889}
   m_Layer: 0
   m_Name: FFactory
@@ -1776,21 +1775,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &3853417014067121141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421287995834701556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealnumber: 0
-  ExplosionHitName: 
-  CanThroughObj: 0
 --- !u!114 &6072001643299766889
 MonoBehaviour:
   m_ObjectHideFlags: 0

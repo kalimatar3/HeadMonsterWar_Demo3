@@ -6439,7 +6439,6 @@ GameObject:
   - component: {fileID: 2811396749587760949}
   - component: {fileID: 39565494152271347}
   - component: {fileID: 9223137902420078507}
-  - component: {fileID: 3484913091580038795}
   - component: {fileID: 3935430057757104198}
   m_Layer: 0
   m_Name: Filler_GunShop1
@@ -6509,21 +6508,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &3484913091580038795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780213470043181667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cca7662cb707c4aa94e12f0af2da19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealnumber: 0
-  ExplosionHitName: 
-  CanThroughObj: 0
 --- !u!114 &3935430057757104198
 MonoBehaviour:
   m_ObjectHideFlags: 0

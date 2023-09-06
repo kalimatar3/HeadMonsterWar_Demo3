@@ -26,11 +26,11 @@ public class PanelDeSpawn : Despawnbytime
             Color color = new Color();
             color = Color.red;
             color.a = 0.5f;
-            image.color = Color.Lerp(image.color,color,Time.deltaTime * 1f * 30f/1.5f);
+            image.color = Color.Lerp(image.color,color,Time.deltaTime * 1f * 40/1.5f);
             if(image.color == color) return true;
             return false;
         });
         image.color = Color.red;
-        PanelCtrl.Instance.HirePanel(this.transform.name);
+       TakeDamePanelSpawner.Instance.DeSpawnToPool(this.transform);
     }
 }
