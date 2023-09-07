@@ -76,16 +76,19 @@ public class TutorialLevel2 : TutorialLevel
         });
         TutorialUI.Instance.DeActiveTutorialPoint();
         yield return new  WaitUntil(predicate:()=>
-        {
-            for( int i = 0 ; i < HolderManager.Instance.ListHolder.Count ; i++)
+        {        
+            while(FistBoss == null)
             {
-                if(HolderManager.Instance.ListHolder[i].name == "BossesHolder")
+                for( int i = 0 ; i < HolderManager.Instance.ListHolder.Count ; i++)
                 {
-                    if(HolderManager.Instance.ListHolder[i].childCount > 0) 
-                    FistBoss = HolderManager.Instance.ListHolder[i].GetChild(0);
+                    if(HolderManager.Instance.ListHolder[i].name == "BossesHolder")
+                    {
+                        if(HolderManager.Instance.ListHolder[i].childCount > 0) 
+                        FistBoss = HolderManager.Instance.ListHolder[i].GetChild(0);
+                    }
                 }
+                if(FistBoss == null) return false;
             }
-            if(FistBoss == null) return false;
             return true;
         });
         yield return new WaitForSeconds(4f);

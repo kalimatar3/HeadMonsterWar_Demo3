@@ -14,8 +14,7 @@ public class EnemieCtrl : MyBehaviour
     [SerializeField] protected EnemieAct enemieAct;
     public EnemieAct EnemieAct => enemieAct;
     [SerializeField] public EnemieAct EnemieAct1;
-
-
+    public Transform Model;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -23,6 +22,17 @@ public class EnemieCtrl : MyBehaviour
         this.LoadSpawnDropItem();
         this.LoadEnemieReciver();
         this.LoadSkill();
+        this.LoadModel();
+    }
+    protected void LoadModel()
+    {
+        foreach(Transform element in this.transform)
+        {
+            if(element.GetComponent<Animator>() != null)
+            {
+                Model = element;
+            }
+        }
     }
     protected void LoadTrackPlayer()
     {

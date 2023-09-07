@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class TutorialLevel1 : TutorialLevel
 {
     [SerializeField] protected Transform HpberHolder;
+    [SerializeField] Transform Enemy;
     protected override void Start()
     {
         base.Start();
@@ -68,7 +69,15 @@ public class TutorialLevel1 : TutorialLevel
         });
         GameManager.Instance.ResumeGame();
         TutorialUI.Instance.DeActivePanel();
-        Transform Enemy = EnemiesSpawner.Instance.Spawn("Enemie_01", PlayerController.Instance.transform.position + new Vector3(20,0,0),Quaternion.identity);        
+        Enemy = EnemiesSpawner.Instance.Spawn("Enemie_01", PlayerController.Instance.transform.position + new Vector3(20,0,0),Quaternion.identity);        
+        yield return new WaitUntil(predicate:()=>
+        {
+            while(Enemy == null)
+            {
+                return false;
+            }
+            return true;
+        });
         TutorialUI.Instance.ActiveTutorialPoint();
         TutorialUI.Instance.SetCollorTutorialPoint(Enemy,Color.red);
 

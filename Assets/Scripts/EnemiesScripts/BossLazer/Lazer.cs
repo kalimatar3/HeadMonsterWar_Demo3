@@ -41,7 +41,7 @@ public class Lazer : EnemieAct
             {
                 lazergate = false;
                 this.DamePoint =  EnemieActSpawner.Instance.Spawn(EnemieActSpawner.ActEnum.LazerHit.ToString(),obj.point,Quaternion.identity);
-                DamePoint.GetComponentInChildren<DespawnLazerHit>().Obj = this.transform.parent;
+                DamePoint.GetComponentInChildren<DespawnLazerHit>().Obj = this.TarGet;
             }
             DamePoint.position = obj.point;
        }

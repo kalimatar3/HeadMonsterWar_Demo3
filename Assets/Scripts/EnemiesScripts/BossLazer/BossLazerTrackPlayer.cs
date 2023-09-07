@@ -19,12 +19,11 @@ public class BossLazerTrackPlayer : BosstTrackPlayer
         {
             thisNav.speed = 0;
             thisNav.SetDestination(this.transform.parent.position);
-            if(Vector3.Angle(Direction,this.transform.parent.forward) >= 60)
+            if(Vector3.Angle(Direction,this.transform.parent.forward) > 30)
             {
                 followObj  targetfollow = TarGet.GetComponentInChildren<followObj>();
                 targetfollow.smooth = 0f;
-                this.transform.parent.rotation = Quaternion.Lerp(this.transform.parent.rotation,Quaternion.LookRotation(Direction),Time.deltaTime * 1f);
-                //this.transform.parent.forward = Vector3.Lerp(this.transform.parent.forward,Direction,Time.deltaTime * 1f);
+                this.transform.parent.forward = Vector3.Lerp(this.transform.parent.forward,Direction,Time.deltaTime * 1f);
             }
             else
             {

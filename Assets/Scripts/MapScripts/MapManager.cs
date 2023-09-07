@@ -8,6 +8,8 @@ public class MapManager : MyBehaviour
     public static MapManager Instance { get => instance ;}
     public List<Vector3> ListBossSapwnPos;
     public List<Vector3> ListEnemySpawnPos;
+    [SerializeField] protected Transform NavMeshTrans;
+    public List<Transform> ListNav;
     protected override void Awake()
     {
         base.Awake();
@@ -17,6 +19,15 @@ public class MapManager : MyBehaviour
     protected override void LoadComponents()
     {
        base.LoadComponents();
+       this.LoadListNav();
+    }
+    protected void LoadListNav()
+    {
+        if(ListNav.Count > 0) return;
+        foreach(Transform element in NavMeshTrans)
+        {
+            ListNav.Add(element);
+        }
     }
     public void LoadMap(string Mapname)
     {
@@ -39,14 +50,19 @@ public class MapManager : MyBehaviour
         {
             ListBossSapwnPos.Add(element.position);
         }
+        foreach(Transform element in ListNav)
+        {
+            element.gameObject.SetActive(false);
+            if(element.name == Mapname)
+            {
+                element.gameObject.SetActive(true);
+            }
+        }
         Transform EnemySpawnTrans = thisMap.transform.Find("EnemySpawnPos");
         foreach(Transform element in EnemySpawnTrans)
         {
             ListEnemySpawnPos.Add(element.position);
         }
-    }
-    protected void SpawnMap(string Mapname)
-    {
     }
     public IEnumerator DelayLoadMap()
     {

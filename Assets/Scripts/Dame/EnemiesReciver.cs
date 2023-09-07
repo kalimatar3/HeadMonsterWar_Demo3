@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-
 public class EnemiesReciver : DameReciver
 {
     protected EnemieCtrl EnemieCtrl;
@@ -21,6 +20,8 @@ public class EnemiesReciver : DameReciver
         }
 
         this.EnemieCtrl.GetComponent<BoxCollider>().enabled = true;
+        this.EnemieCtrl.TrackPlayer.thisNav.enabled = true;
+        this.EnemieCtrl.Model.transform.localPosition = Vector3.zero;
         DropGate = false;
         GetComponent<CapsuleCollider>().enabled = true;
     }
@@ -41,7 +42,7 @@ public class EnemiesReciver : DameReciver
             return Candead();
         });
         EffectSpawner.Instance.Spawn(CONSTEffect.EnemyDeadEffect,this.transform.position,this.transform.rotation);
-        this.EnemieCtrl.TrackPlayer.thisNav.speed = 0;
+        this.EnemieCtrl.TrackPlayer.thisNav.enabled = false;
         this.EnemieCtrl.EnemieAct.gameObject.SetActive(false);
         if(this.EnemieCtrl.EnemieAct1 != null)
         {
@@ -57,7 +58,7 @@ public class EnemiesReciver : DameReciver
             this.EnemieCtrl.SpawnDropItem.spawnBuff();
         }
         yield return new WaitForSeconds(2f);
-        this.transform.parent.DOMoveY(-2f,1f)
+        this.EnemieCtrl.Model.DOMoveY(-2f,1f)
         .SetRelative()
         .SetEase(Ease.Linear);
         yield return new WaitForSeconds(1f);

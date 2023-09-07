@@ -31,7 +31,7 @@ public class PlayerTopRotation : MyBehaviour
             timer += Time.deltaTime * 1f;
             if(timer >= Time.deltaTime)
             {
-                this.transform.rotation =  Quaternion.Lerp(this.transform.rotation,Quaternion.LookRotation(playerUnderRotation.transform.forward),timer * 1f );
+                this.transform.rotation =  Quaternion.Lerp(this.transform.rotation,Quaternion.LookRotation(playerUnderRotation.transform.forward),timer * 1f);
                 cacheRos = Quaternion.LookRotation(playerUnderRotation.transform.forward);
                 timer = 0;
             }
