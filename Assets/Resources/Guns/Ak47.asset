@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230776b607a68ce449cad363aa433667, type: 3}
+  m_Name: Ak47
+  m_EditorClassIdentifier: 
+  GunName: Ak47
+  Bulletname: Ak47bullet
+  CanThroughObj: 0
+  HitExplosionName: Ak47HitExplosion
+  FireExplosionName: Ak47FireExplosion
+  bulletSpeed: 40
+  GunUpgrade:
+  - MaxAmmo: 30
+    Firerate: 0.1
+    Reloadtime: 1
+    Dame: 30
+    Range: 50
+  - MaxAmmo: 31
+    Firerate: 0.1
+    Reloadtime: 1
+    Dame: 30
+    Range: 50
+  - MaxAmmo: 32
+    Firerate: 0.1
+    Reloadtime: 1
+    Dame: 30
+    Range: 50
+  - MaxAmmo: 33
+    Firerate: 0.1
+    Reloadtime: 1
+    Dame: 30
+    Range: 50
+  - MaxAmmo: 33
+    Firerate: 0.1
+    Reloadtime: 1
+    Dame: 30
+    Range: 50
+  - MaxAmmo: 33
+    Firerate: 0.1
+    Reloadtime: 1
+    Dame: 30
+    Range: 50

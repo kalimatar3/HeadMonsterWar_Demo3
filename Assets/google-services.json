@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "527160055425",
+    "project_id": "monster-war---fps-shooter",
+    "storage_bucket": "monster-war---fps-shooter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527160055425:android:96f1d926af3243e6bfdf80",
+        "android_client_info": {
+          "package_name": "com.monster.war.fps.shooter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBeEjNtyvqPVtXbS38nOXhHWiJp5OFTXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
